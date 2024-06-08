@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/sijinhui/ubuntu
+FROM hub.siji.ci/library/ubuntu
 
 WORKDIR /ssr
 

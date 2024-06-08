@@ -9,28 +9,28 @@ external-controller: :9090
 dns:
   enable: false
   nameserver:
-  - 223.5.5.5
-  - 119.29.29.29
-  - 180.76.76.76
-  - 117.50.11.11
-  - https://doh.360.cn/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
+    - 180.76.76.76
+    - 117.50.11.11
+    - https://doh.360.cn/dns-query
   fallback:
     - tls://dns.google:853
     - https://cloudflare-dns.com/dns-query
     - https://dns.google/dns-query
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-  - +.stun.*.*
-  - +.stun.*.*.*
-  - +.stun.*.*.*.*
-  - +.stun.*.*.*.*.*
-  - '*.n.n.srv.nintendo.net'
-  - +.stun.playstation.net
-  - xbox.*.*.microsoft.com
-  - '*.*.xboxlive.com'
-  - '*.msftncsi.com'
-  - '*.msftconnecttest.com'
-  - WORKGROUP
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - '*.n.n.srv.nintendo.net'
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - '*.*.xboxlive.com'
+    - '*.msftncsi.com'
+    - '*.msftconnecttest.com'
+    - WORKGROUP
   enhanced-mode: fake-ip
 {% if default(request.clash.dns, "") == "1" %}
 dns:
