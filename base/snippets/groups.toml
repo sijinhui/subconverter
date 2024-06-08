@@ -6,8 +6,8 @@ rule = ["[]♻️ 自动选择", "[]服务器用灾备", "[]🎯 全球直连", 
 [[custom_groups]]
 name = "♻️ 自动选择"
 type = "url-test"
-rule = [".*"]
-url = "http://www.gstatic.com/generate_204"
+rule = ["^(?!.*北京).*"]
+url = "http://www.google.com/generate_204"
 interval = 300
 
 [[custom_groups]]
