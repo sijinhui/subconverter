@@ -1,8 +1,9 @@
-FROM registry.cn-hangzhou.aliyuncs.com/sijinhui/ubuntu
+FROM hub.siji.ci/library/ubuntu:20.04
 
 WORKDIR /ssr
 
 COPY . .
 
 EXPOSE 25500
+RUN chmod +x ./subconverter-linux
 CMD [ "./subconverter-linux" ]
