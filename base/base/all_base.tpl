@@ -6,6 +6,7 @@ allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: :9090
+{% if default(request.clash.dns, "") == "1" %}
 dns:
   enable: false
   nameserver:
@@ -32,10 +33,6 @@ dns:
     - '*.msftconnecttest.com'
     - WORKGROUP
   enhanced-mode: fake-ip
-{% if default(request.clash.dns, "") == "1" %}
-dns:
-  enable: true
-  listen: :1053
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
