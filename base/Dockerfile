@@ -1,4 +1,4 @@
-FROM hub.siji.ci/library/ubuntu:20.04
+FROM ubuntu:20.04
 
 WORKDIR /ssr
 
