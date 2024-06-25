@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM hub.sivpn.cn/library/ubuntu:20.04
 
 WORKDIR /ssr
 
