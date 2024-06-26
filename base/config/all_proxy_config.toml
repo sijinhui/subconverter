@@ -28,7 +28,7 @@ clash_rule_base = "base/all_base.tpl"
 [[custom_groups]]
 name = "服务器用灾备"
 type = "fallback"
-rule = ["s801", "北京"]
+rule = ["s801"]
 url = "http://www.apple.com/library/test/success.html"
 interval = 300
 tolerance = 100
@@ -41,8 +41,7 @@ rule = ["[]DIRECT"]
 [[custom_groups]]
 name = "🐟 漏网之鱼"
 type = "select"
-rule = ["[]服务器用灾备"]
-
+rule = ["[]服务器用灾备",".*"]
 #
 #[[rulesets]]
 #import = "snippets/all_proxy_rulesets.toml"
