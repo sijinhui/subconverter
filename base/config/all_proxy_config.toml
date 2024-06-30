@@ -29,7 +29,7 @@ clash_rule_base = "base/all_base.tpl"
 name = "服务器用灾备"
 type = "fallback"
 rule = ["s801"]
-url = "http://www.apple.com/library/test/success.html"
+url = "http://www.google-analytics.com/generate_204"
 interval = 300
 tolerance = 100
 
