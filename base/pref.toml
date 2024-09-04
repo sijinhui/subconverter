@@ -130,9 +130,24 @@ function isChinese(text) {
     // 简单检查字符串是否包含汉字，这里假设汉字编码范围主要在\u4e00到\u9fff之间
     return /^[\u4e00-\u9fff]/.test(text);
 }
+function containsDownload(text) {
+    // 检查字符串是否包含“下载”两个字
+    return text.includes("下载");
+}
 function compare(node_a, node_b) {
    const aIsChinese = isChinese(node_a.Remark);
    const bIsChinese = isChinese(node_b.Remark);
+
+    const aContainsDownload = containsDownload(node_a.Remark);
+    const bContainsDownload = containsDownload(node_b.Remark);
+
+    if (aContainsDownload && !bContainsDownload) {
+        return false; // 如果 a 包含“下载”而 b 不包含，则 a 应该排在 b 后面
+    }
+    if (!aContainsDownload && bContainsDownload) {
+        return true; // 如果 b 包含“下载”而 a 不包含，则 a 应该排在 b 前面
+    }
+
    if (aIsChinese && !bIsChinese) {
     return true;
    }
@@ -200,7 +215,7 @@ import = "snippets/groups.toml"
 [[custom_groups]]
 name = "服务器用灾备"
 type = "fallback"
-rule = ["s801", "北京"]
+rule = ["s801", "下载", "北京"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 300
 tolerance = 100
