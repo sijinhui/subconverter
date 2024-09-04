@@ -3,3 +3,6 @@ subconverter.exe
 cmake-build-debug
 .idea
 base/cache
+
+.DS_Store
+base/.DS_Store
