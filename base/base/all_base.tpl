@@ -7,12 +7,9 @@ mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: :9090
 
-hosts:
-  'gitlab.ainnovation.com': 47.92.38.89
-
 {% if default(request.clash.dns, "") == "1" %}
 dns:
-  enable: true
+  enable: false
   use-hosts: true
   nameserver:
     - 223.5.5.5
@@ -38,7 +35,7 @@ dns:
     - '*.msftconnecttest.com'
     - '*.ainnovation.com'
     - WORKGROUP
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
