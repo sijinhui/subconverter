@@ -6,9 +6,14 @@ allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: :9090
+
+hosts:
+  'gitlab.ainnovation.com': 47.92.38.89
+
 {% if default(request.clash.dns, "") == "1" %}
 dns:
-  enable: false
+  enable: true
+  use-hosts: true
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
@@ -31,8 +36,9 @@ dns:
     - '*.*.xboxlive.com'
     - '*.msftncsi.com'
     - '*.msftconnecttest.com'
+    - '*.ainnovation.com'
     - WORKGROUP
-  enhanced-mode: fake-ip
+  enhanced-mode: redir-host
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
