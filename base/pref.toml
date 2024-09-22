@@ -4,7 +4,7 @@ version = 1
 api_mode = false
 
 # Access token used for performing critical action through Web interface
-api_access_token = "password"
+api_access_token = "si"
 
 # Default URLs, used when no URL is provided in request, use "|" to separate multiple subscription links, supports local files/URL
 default_url = []
@@ -17,7 +17,7 @@ insert_url = [""]
 prepend_insert_url = true
 
 # Exclude nodes which remarks match the following patterns. Supports regular expression.
-exclude_remarks = ["(到期|剩余流量|时间|官网|产品)"]
+exclude_remarks = ["(到期|剩余流量|时间|官网|产品|域名|访问|失联)"]
 
 # Only include nodes which remarks match the following patterns. Supports regular expression.
 #include_remarks = ["V3.*港"]
