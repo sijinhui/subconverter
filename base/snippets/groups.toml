@@ -1,14 +1,21 @@
 [[custom_groups]]
 name = "🔰 节点选择"
 type = "select"
-rule = ["[]♻️ 自动选择", "[]服务器用灾备", "[]🎯 全球直连", ".*"]
+rule = ["[]♻️ 自动选择", "[]服务器用灾备", "[]🎯 全球直连", "[]💾 备用", "^(?!.*【备用】).*"]
 
 [[custom_groups]]
 name = "♻️ 自动选择"
 type = "url-test"
-rule = ["^(?!.*北京).*"]
+rule = ["^(?!【备用】)(?!北京).*"]
 url = "http://www.google-analytics.com/generate_204"
-interval = 300
+interval = 120
+
+[[custom_groups]]
+name = "Ⓜ️🍎"
+type = "select"
+rule = ["[]🎯 全球直连",
+"[]🔰 节点选择",
+]
 
 [[custom_groups]]
 name = "✉️ ChatGPT"
@@ -31,10 +38,7 @@ rule = [
 [[custom_groups]]
 name = "🐟 漏网之鱼"
 type = "select"
-rule = ["[]🔰 节点选择",
-"[]🎯 全球直连",
-"[]♻️ 自动选择",
-".*"]
+rule = ["[]🔰 节点选择"]
 
 #[[custom_groups]]
 #name = "🚫 运营劫持"
@@ -65,13 +69,6 @@ rule = ["[]🔰 节点选择",
 #"[]🔰 节点选择",
 #".*"]
 
-[[custom_groups]]
-name = "Ⓜ️🍎"
-type = "select"
-rule = ["[]🎯 全球直连",
-"[]🔰 节点选择",
-".*"]
-
 #[[custom_groups]]
 #name = "📲 电报信息"
 #type = "select"
@@ -86,6 +83,13 @@ rule = ["[]🎯 全球直连",
 #"[]🎯 全球直连",
 #"[]♻️ 自动选择",
 #".*"]
+
+[[custom_groups]]
+name = "💾 备用"
+type = "url-test"
+rule = ["【备用】.*"]
+url = "http://www.google-analytics.com/generate_204"
+interval = 120
 
 [[custom_groups]]
 name = "🎯 全球直连"
@@ -105,10 +109,10 @@ rule = ["[]REJECT", "[]DIRECT"]
 #"[]🔰 节点选择"
 #]
 
-[[custom_groups]]
-name = "🐟 漏网之鱼"
-type = "select"
-rule = ["[]🔰 节点选择",
-"[]🎯 全球直连",
-"[]♻️ 自动选择",
-".*"]
+#[[custom_groups]]
+#name = "🐟 漏网之鱼"
+#type = "select"
+#rule = ["[]🔰 节点选择",
+#"[]🎯 全球直连",
+#"[]♻️ 自动选择",
+#".*"]
