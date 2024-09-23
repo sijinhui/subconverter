@@ -212,15 +212,6 @@ import = "snippets/emoji.toml"
 [[custom_groups]]
 import = "snippets/groups.toml"
 
-[[custom_groups]]
-name = "服务器用灾备"
-type = "fallback"
-rule = ["s801", "下载", "北京"]
-url = "http://www.google-analytics.com/generate_204"
-interval = 300
-tolerance = 100
-# lazy = true
-
 # [[custom_groups]]
 # name = "Auto"
 # type = "url-test"
