@@ -97,6 +97,10 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/SteamCN.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
+ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
 ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Bilibili.list"
 
 [[rulesets]]
