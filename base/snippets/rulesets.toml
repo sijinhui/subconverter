@@ -10,11 +10,11 @@ ruleset = "rules/LocalAreaNetwork.list"
 #group = "🍎 苹果服务"
 #ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Apple/Apple.list"
 
+#[[rulesets]]
+#group = "Ⓜ️"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Apple/Apple.list"
 [[rulesets]]
-group = "Ⓜ️🍎"
-ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Apple/Apple.list"
-[[rulesets]]
-group = "Ⓜ️🍎"
+group = "Ⓜ️"
 ruleset = "rules/MSServices.list"
 
 [[rulesets]]
