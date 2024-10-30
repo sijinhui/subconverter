@@ -9,7 +9,7 @@ external-controller: :9090
 
 {% if default(request.clash.dns, "") == "1" %}
 dns:
-  enable: false
+  enable: true
   use-hosts: true
   nameserver:
     - 223.5.5.5
