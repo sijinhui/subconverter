@@ -17,10 +17,14 @@ dns:
     - 180.76.76.76
     - 117.50.11.11
     - https://doh.360.cn/dns-query
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
   fallback:
     - tls://dns.google:853
     - https://cloudflare-dns.com/dns-query
     - https://dns.google/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - +.stun.*.*
