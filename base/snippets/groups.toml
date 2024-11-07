@@ -6,7 +6,7 @@ rule = ["[]♻️ 自动选择", "[]服务器用灾备", "[]🎯 全球直连", 
 [[custom_groups]]
 name = "♻️ 自动选择"
 type = "url-test"
-rule = ["^(?!【备用】)(?!北京).*"]
+rule = ["^(?!【备用】)(?!北京)(?!self).*"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
 
