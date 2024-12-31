@@ -3,7 +3,7 @@
 # source: https://docs.microsoft.com/en-us/office365/enterprise/urls-and-ip-address-ranges
 
 DOMAIN-KEYWORD,1drv
-DOMAIN-KEYWORD,microsoft
+# DOMAIN-KEYWORD,microsoft
 DOMAIN-SUFFIX,aadrm.com
 DOMAIN-SUFFIX,acompli.com
 DOMAIN-SUFFIX,acompli.net
@@ -15,15 +15,15 @@ DOMAIN-SUFFIX,azure.com
 DOMAIN-SUFFIX,azure.net
 DOMAIN-SUFFIX,azureedge.net
 DOMAIN-SUFFIX,azurerms.com
-DOMAIN-SUFFIX,bing.com
+# DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,cloudapp.net
 DOMAIN-SUFFIX,cloudappsecurity.com
 DOMAIN-SUFFIX,edgesuite.net
 DOMAIN-SUFFIX,gfx.ms
-DOMAIN-SUFFIX,hotmail.com
-DOMAIN-SUFFIX,live.com
-DOMAIN-SUFFIX,live.net
-DOMAIN-SUFFIX,lync.com
+# DOMAIN-SUFFIX,hotmail.com
+# DOMAIN-SUFFIX,live.com
+# DOMAIN-SUFFIX,live.net
+# DOMAIN-SUFFIX,lync.com
 DOMAIN-SUFFIX,msappproxy.net
 DOMAIN-SUFFIX,msauth.net
 DOMAIN-SUFFIX,msauthimages.net
@@ -77,4 +77,4 @@ DOMAIN-SUFFIX,windowsupdate.com
 DOMAIN-SUFFIX,wunderlist.com
 DOMAIN-SUFFIX,yammer.com
 DOMAIN-SUFFIX,yammerusercontent.com
-DOMAIN-SUFFIX,bingapis.com
+# DOMAIN-SUFFIX,bingapis.com

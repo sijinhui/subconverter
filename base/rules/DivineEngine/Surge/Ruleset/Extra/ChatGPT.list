@@ -1,0 +1,19 @@
+# > proton.me
+DOMAIN-SUFFIX,proton.me
+# > ChatGPT
+DOMAIN-SUFFIX,openai.com
+DOMAIN,auth0.openai.com
+DOMAIN,chat.openai.com
+DOMAIN,api.openai.com
+DOMAIN-SUFFIX,auth0.com
+DOMAIN,cdn.auth0.com
+DOMAIN,cdn.openai.com
+DOMAIN,status.openai.com
+DOMAIN,m.stripe.com
+DOMAIN,api-iam.intercom.io
+DOMAIN,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN,cdn.oaistatic.com
+DOMAIN,chatgpt.com
+DOMAIN-SUFFIX,widget.intercom.io
+DOMAIN-SUFFIX,intercomcdn.com

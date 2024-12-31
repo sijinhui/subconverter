@@ -5,11 +5,41 @@ socks-port: {{ default(global.clash.socks_port, "7891") }}
 allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
+
 external-controller: {{ default(global.clash.external_controller, "127.0.0.1:9090") }}
 {% if default(request.clash.dns, "") == "1" %}
 dns:
   enable: true
-  listen: :1053
+  use-hosts: true
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 180.76.76.76
+    - 117.50.11.11
+    - https://doh.360.cn/dns-query
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
+  fallback:
+    - tls://dns.google:853
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - 223.5.5.5
+    - 119.29.29.29
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - '*.n.n.srv.nintendo.net'
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - '*.*.xboxlive.com'
+    - '*.msftncsi.com'
+    - '*.msftconnecttest.com'
+    - '*.ainnovation.com'
+    - WORKGROUP
+  enhanced-mode: fake-ip
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
