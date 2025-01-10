@@ -4,7 +4,7 @@ match = '^(.*?)c92s4\.(.*?)$'
 replace = "海外节点1"
 
 [[rename_node]]
-match = '^(.*?)c71s4\.(.*?)$'
+match = '^(.*?)c716s4\.(.*?)$'
 replace = "海外节点2"
 
 [[rename_node]]
@@ -12,7 +12,7 @@ match = '^(.*?)c92s801\.(.*?)$'
 replace = "下载专用节点1"
 
 [[rename_node]]
-match = '^(.*?)c71s801\.(.*?)$'
+match = '^(.*?)c716s801\.(.*?)$'
 replace = "下载专用节点2"
 
 #[[rename_node]]
