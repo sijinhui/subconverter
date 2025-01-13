@@ -1,19 +1,27 @@
 # short names
 [[rename_node]]
 match = '^(.*?)c92s4\.(.*?)$'
-replace = "海外节点1"
+replace = "海外节点1-JP"
 
 [[rename_node]]
 match = '^(.*?)c716s4\.(.*?)$'
-replace = "海外节点2"
+replace = "海外节点2-HK"
 
 [[rename_node]]
 match = '^(.*?)c92s801\.(.*?)$'
-replace = "下载专用节点1"
+replace = "下载专用节点1-US"
 
 [[rename_node]]
 match = '^(.*?)c716s801\.(.*?)$'
-replace = "下载专用节点2"
+replace = "下载专用节点2-HK"
+
+[[rename_node]]
+match = '^(.*?)c716(s\d+)\.(.*?)$'
+replace = "HK-$2"
+
+[[rename_node]]
+match = '^(.*?)c92(s\d+)\.(.*?)$'
+replace = "LA-$2"
 
 #[[rename_node]]
 #match = '^c92s4\.(.*?)$'
