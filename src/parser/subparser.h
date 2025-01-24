@@ -63,6 +63,7 @@ void hysteria2Construct(
     const std::string &remarks,
     const std::string &server,
     const std::string &port,
+    const std::string &ports,
     const std::string &up,
     const std::string &down,
     const std::string &password,

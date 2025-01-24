@@ -239,10 +239,6 @@ void hysteria2Construct(
     node.OBFSParam = obfs_password;
     node.SNI = sni;
     node.Fingerprint = fingerprint;
-    if (!alpn.empty())
-    {
-        node.Alpn = StringArray {alpn};
-    }
     node.Ca = ca;
     node.CaStr = ca_str;
     node.CWND = to_int(cwnd);
@@ -1364,7 +1360,7 @@ void explodeClash(Node yamlnode, std::vector<Proxy> &nodes)
             singleproxy["ca-str"] >>= ca_str;
             singleproxy["cwnd"] >>= cwnd;
 
-            hysteria2Construct(node, group, ps, server, port, up, down, password, obfs, obfs_password, sni, fingerprint, alpn, ca, ca_str, cwnd, tfo, scv, underlying_proxy);
+            hysteria2Construct(node, group, ps, server, port, ports, up, down, password, obfs, obfs_password, sni, fingerprint, alpn, ca, ca_str, cwnd, tfo, scv, underlying_proxy);
             break;
 
         default:
