@@ -21,7 +21,7 @@ replace = "HK-$2"
 
 [[rename_node]]
 match = '^(.*?)c92(s\d+)\.(.*?)$'
-replace = "LA-$2"
+replace = "US-$2"
 
 #[[rename_node]]
 #match = '^c92s4\.(.*?)$'
