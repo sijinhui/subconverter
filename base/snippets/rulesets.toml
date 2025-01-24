@@ -13,9 +13,6 @@ ruleset = "rules/LocalAreaNetwork.list"
 #[[rulesets]]
 #group = "Ⓜ️"
 #ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Apple/Apple.list"
-[[rulesets]]
-group = "Ⓜ️"
-ruleset = "rules/MSServices.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
@@ -68,11 +65,22 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/Guard/Hijacking.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/DivineEngine/Surge/Ruleset/China.list"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/China.list"
+ruleset = "rules/blackmatrix7/rule/Surge/China/China_All.list"
+
+[[rulesets]]
+group = "🔰 节点选择"
+ruleset = "rules/blackmatrix7/rule/Surge/Proxy/Proxy_All.list"
+
+[[rulesets]]
+group = "Ⓜ️"
+ruleset = "rules/blackmatrix7/rule/Surge/Microsoft/Microsoft.list"
+#ruleset = "rules/MSServices.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/ACL4SSR/Clash/Ruleset/SteamCN.list"
+#ruleset = "rules/ACL4SSR/Clash/Ruleset/SteamCN.list"
+ruleset = "rules/blackmatrix7/rule/Surge/SteamCN/SteamCN.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
@@ -80,31 +88,37 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Bilibili.list"
+ruleset = "rules/blackmatrix7/rule/Surge/ChinaMedia/ChinaMedia.list"
+
+
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Bilibili.list"
+#
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/iQiyi.list"
+#
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Letv.list"
+#
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/MOO.list"
+#
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Tencent Video.list"
+#
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Youku.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/iQiyi.list"
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Letv.list"
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/MOO.list"
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Tencent Video.list"
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Youku.list"
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/NobyDa/Surge/Download.list"
+#ruleset = "rules/NobyDa/Surge/Download.list"
+ruleset = "rules/blackmatrix7/rule/Surge/Download/Download.list"
 
 [[rulesets]]
 group = "🔰 节点选择"
@@ -113,7 +127,8 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/Global.list"
 [[rulesets]]
 #group = "🎥 NETFLIX"
 group = "🔰 节点选择"
-ruleset = "rules/DivineEngine/Surge/Ruleset/StreamingMedia/Video/Netflix.list"
+ruleset = "rules/blackmatrix7/rule/Surge/Netflix/Netflix.list"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/StreamingMedia/Video/Netflix.list"
 
 [[rulesets]]
 group = "🔰 节点选择"
@@ -129,7 +144,8 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/StreamingMedia/Streaming.list"
 
 [[rulesets]]
 group = "✉️ ChatGPT"
-ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/ChatGPT.list"
+ruleset = "rules/blackmatrix7/rule/Surge/OpenAI/OpenAI.list"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/ChatGPT.list"
 
 [[rulesets]]
 group = "🎯 全球直连"

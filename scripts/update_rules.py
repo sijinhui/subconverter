@@ -67,7 +67,7 @@ def main():
         r = open_repo(repo_path)
         if r is None:
             logging.info(f"cloning repo {url} to {repo_path}")
-            r = Repo.clone_from(url, repo_path)
+            r = Repo.clone_from(url, repo_path, depth=1)
         else:
             logging.info(f"repo {repo_path} exists")
             

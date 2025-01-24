@@ -14,8 +14,8 @@ interval = 120
 name = "Ⓜ️"
 type = "select"
 rule = [
-    "[]🔰 节点选择",
     "[]🎯 全球直连",
+    "[]🔰 节点选择",
 ]
 
 [[custom_groups]]
