@@ -52,6 +52,9 @@ rule = ["[]服务器用灾备"]
 #
 #[[rulesets]]
 #import = "snippets/all_proxy_rulesets.toml"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/LocalAreaNetwork.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
