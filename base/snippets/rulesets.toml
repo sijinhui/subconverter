@@ -20,6 +20,10 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/Unbreak.list"
 
 [[rulesets]]
 group = "🛑 全球拦截"
+ruleset = "rules/BlockNetworkCustom.list"
+
+[[rulesets]]
+group = "🛑 全球拦截"
 ruleset = "rules/NobyDa/Surge/AdRule.list"
 
 [[rulesets]]
