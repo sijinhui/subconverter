@@ -10,7 +10,6 @@ external-controller: {{ default(global.clash.external_controller, "127.0.0.1:909
 {% if default(request.clash.dns, "") == "1" %}
 dns:
   enable: true
-  ipv6: true
   prefer-h3: true
   use-system-hosts: true
   nameserver:
