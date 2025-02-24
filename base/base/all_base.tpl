@@ -10,12 +10,8 @@ external-controller: {{ default(global.clash.external_controller, "127.0.0.1:909
 {% if default(request.clash.dns, "") == "1" %}
 dns:
   enable: true
+  prefer-h3: true
   use-hosts: true
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-    - 180.76.76.76
-    - 117.50.11.11
   nameserver:
     - https://223.6.6.6/dns-query
     - https://dns.alidns.com/dns-query
@@ -23,13 +19,19 @@ dns:
     - https://dns.pub/dns-query
     - https://doh.pub/dns-query
     - tls://dot.pub:853
-  fallback:
-    - tls://dns.google:853
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - tls://dot.sb:853
+  nameserver-policy:
+    "geosite:cn,private":
+        - https://223.6.6.6/dns-query
+        - https://dns.alidns.com/dns-query
+        - tls://dns.alidns.com:853
+        - https://dns.pub/dns-query
+        - https://doh.pub/dns-query
+        - tls://dot.pub:853
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
     - +.stun.*.*
     - +.stun.*.*.*
     - +.stun.*.*.*.*
