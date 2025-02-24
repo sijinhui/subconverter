@@ -14,12 +14,10 @@ dns:
   prefer-h3: true
   use-system-hosts: true
   nameserver:
-    - https://223.6.6.6/dns-query
-    - https://dns.alidns.com/dns-query
-    - tls://dns.alidns.com:853
-    - https://dns.pub/dns-query
-    - https://doh.pub/dns-query
-    - tls://dot.pub:853
+    - tls://dns.google:853
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - tls://dot.sb:853
   nameserver-policy:
     "geosite:cn,private":
         - https://223.6.6.6/dns-query
