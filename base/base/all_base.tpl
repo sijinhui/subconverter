@@ -13,37 +13,23 @@ dns:
   prefer-h3: true
   use-system-hosts: true
   nameserver:
-    - tls://dns.google:853
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - tls://dot.sb:853
+    - https://223.6.6.6/dns-query
+    - https://dns.alidns.com/dns-query
+    - tls://dns.alidns.com:853
+    - https://dns.pub/dns-query
+    - https://doh.pub/dns-query
+    - tls://dot.pub:853
   nameserver-policy:
-    "geosite:cn,private":
-        - https://223.6.6.6/dns-query
-        - https://dns.alidns.com/dns-query
-        - tls://dns.alidns.com:853
-        - https://dns.pub/dns-query
-        - https://doh.pub/dns-query
-        - tls://dot.pub:853
+    "geosite:geolocation-!cn":
+        - tls://dns.google:853
+        - https://cloudflare-dns.com/dns-query
+        - https://dns.google/dns-query
+        - tls://dot.sb:853
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
-    - +.stun.*.*
-    - +.stun.*.*.*
-    - +.stun.*.*.*.*
-    - +.stun.*.*.*.*.*
-    - '*.n.n.srv.nintendo.net'
-    - +.stun.playstation.net
-    - xbox.*.*.microsoft.com
-    - '*.*.xboxlive.com'
-    - '*.msftncsi.com'
-    - '*.msftconnecttest.com'
-    - '*.ainnovation.com'
-    - '*.si.icu'
-    - '*.xiaosi.cc'
-    - WORKGROUP
   enhanced-mode: fake-ip
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
