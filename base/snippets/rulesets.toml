@@ -136,9 +136,9 @@ group = "🎯 全球直连"
 #ruleset = "rules/NobyDa/Surge/Download.list"
 ruleset = "rules/blackmatrix7/rule/Surge/Download/Download.list"
 
-[[rulesets]]
-group = "🔰 节点选择"
-ruleset = "rules/DivineEngine/Surge/Ruleset/Global.list"
+#[[rulesets]]
+#group = "🔰 节点选择"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/Global.list"
 
 [[rulesets]]
 #group = "🎥 NETFLIX"
@@ -151,8 +151,8 @@ group = "🔰 节点选择"
 ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Telegram/Telegram.list"
 
 [[rulesets]]
-group = "🔰 节点选择"
-ruleset = "rules/DivineEngine/Surge/Ruleset/StreamingMedia/Streaming.list"
+group = "🎯 全球直连"
+ruleset = "rules/DivineEngine/Surge/Ruleset/StreamingMedia/StreamingCN.list"
 
 #[[rulesets]]
 #group = "🔰 节点选择"
