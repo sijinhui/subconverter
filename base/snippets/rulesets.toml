@@ -6,9 +6,6 @@ ruleset = "rules/LocalAreaNetwork.list"
 #group = "Ⓜ️ 微软服务"
 #ruleset = "rules/MSServices.list"
 #
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/NobyDa/Surge/Apple.list"
 
 #[[rulesets]]
 #group = "Ⓜ️"
@@ -93,6 +90,10 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
 [[rulesets]]
 group = "🎯 全球直连"
 ruleset = "rules/blackmatrix7/rule/Surge/ChinaMedia/ChinaMedia.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/custom-direct/direct.txt"
 
 
 #[[rulesets]]
