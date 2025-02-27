@@ -6,9 +6,9 @@ ruleset = "rules/LocalAreaNetwork.list"
 #group = "Ⓜ️ 微软服务"
 #ruleset = "rules/MSServices.list"
 #
-#[[rulesets]]
-#group = "🍎 苹果服务"
-#ruleset = "rules/DivineEngine/Surge/Ruleset/Extra/Apple/Apple.list"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/NobyDa/Surge/Apple.list"
 
 #[[rulesets]]
 #group = "Ⓜ️"
