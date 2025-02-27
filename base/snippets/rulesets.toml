@@ -23,9 +23,14 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/Unbreak.list"
 group = "🛑 全球拦截"
 ruleset = "rules/BlockNetworkCustom.list"
 
+#[[rulesets]]
+#group = "🛑 全球拦截"
+#ruleset = "rules/NobyDa/Surge/AdRule.list"
+
 [[rulesets]]
 group = "🛑 全球拦截"
-ruleset = "rules/NobyDa/Surge/AdRule.list"
+ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
+interval = 86400
 
 [[rulesets]]
 group = "🛑 全球拦截"
