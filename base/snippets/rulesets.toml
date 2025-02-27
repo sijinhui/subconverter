@@ -1,6 +1,10 @@
 [[rulesets]]
 group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+interval = 86400
 
 #[[rulesets]]
 #group = "Ⓜ️ 微软服务"
@@ -64,10 +68,10 @@ ruleset = "rules/DivineEngine/Surge/Ruleset/Guard/Hijacking.list"
 #group = "🌏 国内媒体"
 #ruleset = "rules/lhie1/Surge/Surge 3/Provider/Media/Youku.list"
 
-[[rulesets]]
-group = "🎯 全球直连"
-#ruleset = "rules/DivineEngine/Surge/Ruleset/China.list"
-ruleset = "rules/blackmatrix7/rule/Surge/China/China_All.list"
+#[[rulesets]]
+#group = "🎯 全球直连"
+##ruleset = "rules/DivineEngine/Surge/Ruleset/China.list"
+#ruleset = "rules/blackmatrix7/rule/Surge/China/China_All.list"
 
 [[rulesets]]
 group = "🔰 节点选择"
@@ -93,7 +97,9 @@ ruleset = "rules/blackmatrix7/rule/Surge/ChinaMedia/ChinaMedia.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/custom-direct/direct.txt"
+#ruleset = "rules/custom-direct/direct.txt"
+ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+interval = 86400
 
 
 #[[rulesets]]
