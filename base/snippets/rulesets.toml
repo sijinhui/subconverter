@@ -3,7 +3,7 @@ group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+ruleset = "https://cdn.si.icu/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
 interval = 86400
 
 #[[rulesets]]
@@ -29,7 +29,7 @@ ruleset = "rules/BlockNetworkCustom.list"
 
 [[rulesets]]
 group = "🛑 全球拦截"
-ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
+ruleset = "https://cdn.si.icu/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
 interval = 86400
 
 [[rulesets]]
@@ -103,7 +103,7 @@ ruleset = "rules/blackmatrix7/rule/Surge/ChinaMedia/ChinaMedia.list"
 [[rulesets]]
 group = "🎯 全球直连"
 #ruleset = "rules/custom-direct/direct.txt"
-ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+ruleset = "https://cdn.si.icu/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
 interval = 86400
 
 
