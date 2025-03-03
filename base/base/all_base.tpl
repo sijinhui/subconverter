@@ -12,6 +12,9 @@ dns:
   enable: true
   prefer-h3: true
   use-system-hosts: true
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
   nameserver:
     - https://223.6.6.6/dns-query
     - https://dns.alidns.com/dns-query
@@ -19,12 +22,6 @@ dns:
     - https://dns.pub/dns-query
     - https://doh.pub/dns-query
     - tls://dot.pub:853
-  nameserver-policy:
-    "geosite:geolocation-!cn":
-        - tls://dns.google:853
-        - https://cloudflare-dns.com/dns-query
-        - https://dns.google/dns-query
-        - tls://dot.sb:853
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
