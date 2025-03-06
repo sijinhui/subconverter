@@ -56,6 +56,10 @@ rule = ["[]服务器用灾备"]
 group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
 
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+interval = 86400
 
 [[rulesets]]
 group = "🎯 全球直连"
