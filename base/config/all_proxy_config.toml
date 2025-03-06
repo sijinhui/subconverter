@@ -56,9 +56,12 @@ rule = ["[]服务器用灾备"]
 group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
 
+
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "rules/ACL4SSR/Clash/LocalAreaNetwork.list"
+#ruleset = "rules/custom-direct/direct.txt"
+ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+interval = 86400
 
 [[rulesets]]
 group = "🐟 漏网之鱼"
