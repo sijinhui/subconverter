@@ -1,7 +1,7 @@
 name: GitHub CI
 on:
   push:
-    branches: [ master ]
+#    branches: [ master ]
     tags:
       - "*"
   workflow_dispatch:
@@ -48,11 +48,12 @@ jobs:
       run: tar czf ${{ matrix.artifact }}.tar.gz subconverter
     - name: Draft Release
       if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
-      uses: softprops/action-gh-release@v2
+      uses: ncipollo/release-action@v1
       with:
-        files: ${{ matrix.artifact }}.tar.gz
+        artifacts: ${{ matrix.artifact }}.tar.gz
         draft: true
-        generate_release_notes: true
+        generateReleaseNotes: true
+        makeLatest: true
 
   macos_build:
     strategy:
