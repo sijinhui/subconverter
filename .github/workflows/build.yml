@@ -1,11 +1,9 @@
 name: GitHub CI
 on:
   push:
-#    branches: [ master ]
     tags:
       - "*"
-  workflow_dispatch:
-  pull_request:
+      - "!*-alpha*"
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -46,14 +44,16 @@ jobs:
     - name: Package Release
       if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
       run: tar czf ${{ matrix.artifact }}.tar.gz subconverter
-    - name: Draft Release
-      if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
-      uses: ncipollo/release-action@v1
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        artifacts: ${{ matrix.artifact }}.tar.gz
+        files: |
+          ${{ matrix.artifact }}.tar.gz
         draft: true
-        generateReleaseNotes: true
-        makeLatest: true
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GT_Token }}
 
   macos_build:
     strategy:
@@ -94,7 +94,16 @@ jobs:
         files: ${{ matrix.artifact }}.tar.gz
         draft: true
         generate_release_notes: true
-
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          ${{ matrix.artifact }}.tar.gz
+        draft: true
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GT_Token }}
   windows_build:
     strategy:
       matrix:
