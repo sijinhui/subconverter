@@ -52,6 +52,7 @@ jobs:
       with:
         files: ${{ matrix.artifact }}.tar.gz
         draft: true
+        generate_release_notes: true
 
   macos_build:
     strategy:
@@ -91,6 +92,7 @@ jobs:
       with:
         files: ${{ matrix.artifact }}.tar.gz
         draft: true
+        generate_release_notes: true
 
   windows_build:
     strategy:
@@ -141,8 +143,9 @@ jobs:
       if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
       run: 7z a ${{ matrix.artifact }}.7z subconverter/
     - name: Draft Release
-      if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
+      if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
         files: ${{ matrix.artifact }}.7z
         draft: true
+        generate_release_notes: true
