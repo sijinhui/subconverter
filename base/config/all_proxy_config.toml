@@ -31,7 +31,7 @@ type = "fallback"
 rule = ["s801", "下载", "[]💾 备用"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 300
-tolerance = 100
+tolerance = 200
 
 [[custom_groups]]
 name = "💾 备用"
