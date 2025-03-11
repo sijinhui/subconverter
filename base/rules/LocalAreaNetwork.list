@@ -18,3 +18,5 @@ DOMAIN-SUFFIX,xiaosi.cc
 DOMAIN-SUFFIX,si.icu
 DOMAIN,xiaosi.cc
 DOMAIN,si.icu
+# 临时 租赁用
+IP-CIDR,172.44.0.0/16,no-resolve
