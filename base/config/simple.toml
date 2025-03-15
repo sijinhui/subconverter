@@ -96,7 +96,7 @@ interval = 86400
 #interval = 86400
 
 [[rulesets]]
-group = "🎯 全球直连"
+group = "🔰 节点选择"
 ruleset = "https://jsd-mirror.xiaosi.cc/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Proxy.list"
 interval = 86400
 
