@@ -68,6 +68,10 @@ ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/rule
 interval = 86400
 
 [[rulesets]]
+group = "🎯 全球直连"
+ruleset = "[]GEOIP,CN"
+
+[[rulesets]]
 group = "🐟 漏网之鱼"
 ruleset = "[]FINAL"
 
