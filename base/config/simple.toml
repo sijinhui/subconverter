@@ -95,7 +95,10 @@ interval = 86400
 #ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
 #interval = 86400
 
-"https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/Proxy.list"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://jsd-mirror.xiaosi.cc/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Proxy.list"
+interval = 86400
 
 [[rulesets]]
 group = "🎯 全球直连"
