@@ -13,20 +13,29 @@ lazy = false
 tolerance = 100
 
 [[custom_groups]]
-name = "Ⓜ️"
-type = "select"
-rule = [
-    "[]🎯 全球直连",
-    "[]🔰 节点选择",
-]
+name = "💾 备用"
+type = "url-test"
+rule = ["【备用】.*"]
+url = "http://www.google-analytics.com/generate_204"
+interval = 120
+lazy = false
+tolerance = 100
 
-[[custom_groups]]
-name = "✉️ ChatGPT"
-type = "select"
-rule = [
-    "chatgpt-.*",
-    "[]🔰 节点选择"
-]
+#[[custom_groups]]
+#name = "Ⓜ️"
+#type = "select"
+#rule = [
+#    "[]🎯 全球直连",
+#    "[]🔰 节点选择",
+#]
+#
+#[[custom_groups]]
+#name = "✉️ ChatGPT"
+#type = "select"
+#rule = [
+#    "chatgpt-.*",
+#    "[]🔰 节点选择"
+#]
 
 #[[custom_groups]]
 #name = "🎥 NETFLIX"
@@ -37,11 +46,6 @@ rule = [
 #    "[]🎯 全球直连",
 #    ".*"
 #]
-
-[[custom_groups]]
-name = "🐟 漏网之鱼"
-type = "select"
-rule = ["[]🔰 节点选择"]
 
 #[[custom_groups]]
 #name = "🚫 运营劫持"
@@ -88,13 +92,9 @@ rule = ["[]🔰 节点选择"]
 #".*"]
 
 [[custom_groups]]
-name = "💾 备用"
-type = "url-test"
-rule = ["【备用】.*"]
-url = "http://www.google-analytics.com/generate_204"
-interval = 120
-lazy = false
-tolerance = 100
+name = "🐟 漏网之鱼"
+type = "select"
+rule = ["[]🔰 节点选择"]
 
 [[custom_groups]]
 name = "🎯 全球直连"
