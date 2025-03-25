@@ -692,67 +692,45 @@ proxyToClash(std::vector<Proxy> &nodes, YAML::Node &yamlnode, const ProxyGroupCo
                 break;
             default:
                 continue;
-                switch (x.Type) {
-                    case ProxyGroupType::Select:
-                    case ProxyGroupType::Relay:
-                        break;
-                    case ProxyGroupType::LoadBalance:
-                        singlegroup["strategy"] = x.StrategyStr();
-                        [[fallthrough]];
-                    case ProxyGroupType::Smart:
-                        [[fallthrough]];
-                    case ProxyGroupType::URLTest:
-                        if (!x.Lazy.is_undef())
-                            singlegroup["lazy"] = x.Lazy.get();
-                        [[fallthrough]];
-                    case ProxyGroupType::Fallback:
-                        singlegroup["url"] = x.Url;
-                        if (x.Interval > 0)
-                            singlegroup["interval"] = x.Interval;
-                        if (x.Tolerance > 0)
-                            singlegroup["tolerance"] = x.Tolerance;
-                        break;
-                    default:
-                        continue;
-                }
-                if (!x.DisableUdp.is_undef())
-                    singlegroup["disable-udp"] = x.DisableUdp.get();
-
-                for (const auto &y: x.Proxies)
-                    groupGenerate(y, nodelist, filtered_nodelist, true, ext);
-
-                if (!x.UsingProvider.empty())
-                    singlegroup["use"] = x.UsingProvider;
-                else {
-                    if (filtered_nodelist.empty())
-                        filtered_nodelist.emplace_back("DIRECT");
-                }
-                if (!filtered_nodelist.empty())
-                    singlegroup["proxies"] = filtered_nodelist;
-                if (group_block)
-                    singlegroup.SetStyle(YAML::EmitterStyle::Block);
-                else
-                    singlegroup.SetStyle(YAML::EmitterStyle::Flow);
-
-                bool replace_flag = false;
-                for (auto &&original_group: original_groups) {
-                    if (original_group["name"].as<std::string>() == x.Name) {
-                        original_group.reset(singlegroup);
-                        replace_flag = true;
-                        break;
-                    }
-                }
-                if (!replace_flag)
-                    original_groups.push_back(singlegroup);
         }
-        if (group_compact)
-            original_groups.SetStyle(YAML::EmitterStyle::Flow);
+        if (!x.DisableUdp.is_undef())
+            singlegroup["disable-udp"] = x.DisableUdp.get();
 
-        if (ext.clash_new_field_name)
-            yamlnode["proxy-groups"] = original_groups;
+        for (const auto &y: x.Proxies)
+            groupGenerate(y, nodelist, filtered_nodelist, true, ext);
+
+        if (!x.UsingProvider.empty())
+            singlegroup["use"] = x.UsingProvider;
+        else {
+            if (filtered_nodelist.empty())
+                filtered_nodelist.emplace_back("DIRECT");
+        }
+        if (!filtered_nodelist.empty())
+            singlegroup["proxies"] = filtered_nodelist;
+        if (group_block)
+            singlegroup.SetStyle(YAML::EmitterStyle::Block);
         else
-            yamlnode["Proxy Group"] = original_groups;
+            singlegroup.SetStyle(YAML::EmitterStyle::Flow);
+
+        bool replace_flag = false;
+        for (auto &&original_group: original_groups) {
+            if (original_group["name"].as<std::string>() == x.Name) {
+                original_group.reset(singlegroup);
+                replace_flag = true;
+                break;
+            }
+        }
+        if (!replace_flag)
+            original_groups.push_back(singlegroup);
     }
+
+    if (group_compact)
+        original_groups.SetStyle(YAML::EmitterStyle::Flow);
+
+    if (ext.clash_new_field_name)
+        yamlnode["proxy-groups"] = original_groups;
+    else
+        yamlnode["Proxy Group"] = original_groups;
 }
 
 
