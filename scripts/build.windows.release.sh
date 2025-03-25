@@ -16,13 +16,26 @@ cd ..
 git clone https://github.com/ftk/quickjspp --depth=1
 cd quickjspp
 patch quickjs/quickjs-libc.c -i ../scripts/patches/0001-quickjs-libc-add-realpath-for-Windows.patch
-# 对 quickjs/quickjs.c 应用自动补丁，添加 weak 属性，避免 mingw 重复定义冲突
-# 这里假设 __mingw_fe_pc53_env、__mingw_fe_pc64_env 和 __mingw_fe_dfl_env 均以 int 开头定义
-sed -i 's/^int __mingw_fe_pc53_env/__attribute__((weak)) int __mingw_fe_pc53_env/' quickjs/quickjs.c
-sed -i 's/^int __mingw_fe_pc64_env/__attribute__((weak)) int __mingw_fe_pc64_env/' quickjs/quickjs.c
-sed -i 's/^int __mingw_fe_dfl_env/__attribute__((weak)) int __mingw_fe_dfl_env/' quickjs/quickjs.c
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release .
+cmake -G "Unix Makefiles" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_C_FLAGS="-D__MINGW_FENV_DEFINED" .
 make quickjs -j4
+# 如果是 32 位编译，则处理 libquickjs.a，去掉重复定义的符号
+# 注意：此处通过检测目标架构环境变量，你也可以根据实际情况加个判断
+echo "处理 32 位 libquickjs.a，去除重复定义的符号..."
+mkdir -p tmp_lib
+cd tmp_lib
+# 解包静态库
+ar x ../quickjs/libquickjs.a
+# 对每个目标文件，删除这几个符号
+for obj in *.o; do
+  objcopy --strip-symbol=__mingw_fe_pc53_env --strip-symbol=__mingw_fe_pc64_env --strip-symbol=__mingw_fe_dfl_env "$obj"
+done
+# 重新打包为新的静态库
+ar rcs ../quickjs/libquickjs_fixed.a *.o
+cd ..
+# 用处理后的库覆盖原库（或直接安装新库）
+mv quickjs/libquickjs_fixed.a quickjs/libquickjs.a
 install -d "$MINGW_PREFIX/lib/quickjs/"
 install -m644 quickjs/libquickjs.a "$MINGW_PREFIX/lib/quickjs/"
 install -d "$MINGW_PREFIX/include/quickjs"
