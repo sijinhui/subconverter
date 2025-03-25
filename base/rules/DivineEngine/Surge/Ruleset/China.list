@@ -1,3 +1,11 @@
+# > ainnovation
+DOMAIN-SUFFIX,ainnovation.com
+DOMAIN-SUFFIX,ainnovation.cn
+# > xiaosi
+DOMAIN-SUFFIX,xiaosi.cc
+DOMAIN-SUFFIX,si.icu
+DOMAIN,xiaosi.cc
+DOMAIN,si.icu
 # China Area Network
 # > 360
 DOMAIN-SUFFIX,qhres.com
@@ -158,10 +166,6 @@ DOMAIN-SUFFIX,v-56.com
 DOMAIN-SUFFIX,sogo.com
 DOMAIN-SUFFIX,sogou.com
 DOMAIN-SUFFIX,sogoucdn.com
-# > Steam
-DOMAIN-SUFFIX,steamcontent.com
-DOMAIN-SUFFIX,steampowered.com
-DOMAIN-SUFFIX,steamstatic.com
 # > Tencent
 USER-AGENT,MicroMessenger*
 USER-AGENT,WeChat*
@@ -239,7 +243,7 @@ DOMAIN-SUFFIX,springsunday.net
 DOMAIN-SUFFIX,tjupt.org
 DOMAIN-SUFFIX,totheglory.im
 # > Other
-DOMAIN-SUFFIX,cn
+# DOMAIN-SUFFIX,cn
 DOMAIN-SUFFIX,115.com
 DOMAIN-SUFFIX,360in.com
 DOMAIN-SUFFIX,51ym.me

@@ -1,0 +1,84 @@
+version = 1
+[custom]
+enable_rule_generator = true
+overwrite_original_rules = true
+
+# Options for custom base configuration file
+clash_rule_base = "base/all_base.tpl"
+#surge_rule_base = "base/surge.conf"
+#surfboard_rule_base = "base/surfboard.conf"
+#mellow_rule_base = "base/mellow.conf"
+#quan_rule_base = "base/quan.conf"
+#quanx_rule_base = "base/quanx.conf"
+#loon_rule_base = "base/loon.conf"
+#sssub_rule_base = "base/shadowsocks_base.json"
+#singbox_rule_base = "base/singbox.json"
+
+# Options for adding emojis
+#add_emoji = true
+#remove_old_emoji = true
+
+# Options for filtering nodes
+#include_remarks = []
+#exclude_remarks = []
+
+#[[custom_groups]]
+#import = "snippets/groups_forcerule.toml"
+
+[[custom_groups]]
+name = "服务器用灾备"
+type = "fallback"
+rule = ["s801", "下载", "[]💾 备用"]
+url = "http://www.google-analytics.com/generate_204"
+interval = 300
+tolerance = 200
+
+[[custom_groups]]
+name = "💾 备用"
+type = "url-test"
+rule = ["【备用】.*"]
+url = "http://www.google-analytics.com/generate_204"
+interval = 120
+
+[[custom_groups]]
+name = "🎯 全球直连"
+type = "select"
+rule = ["[]DIRECT"]
+
+[[custom_groups]]
+name = "🐟 漏网之鱼"
+type = "select"
+rule = ["[]服务器用灾备"]
+#
+#[[rulesets]]
+#import = "snippets/all_proxy_rulesets.toml"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/LocalAreaNetwork.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+interval = 86400
+
+[[rulesets]]
+group = "🎯 全球直连"
+#ruleset = "rules/custom-direct/direct.txt"
+ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+interval = 86400
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "[]GEOIP,CN"
+
+[[rulesets]]
+group = "🐟 漏网之鱼"
+ruleset = "[]FINAL"
+
+
+#[[rulesets]]
+#import = ""
+
+[[template_args]]
+key = "clash.dns.port"
+value = "5353"

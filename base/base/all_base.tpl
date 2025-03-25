@@ -5,11 +5,29 @@ socks-port: {{ default(global.clash.socks_port, "7891") }}
 allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
+
 external-controller: {{ default(global.clash.external_controller, "127.0.0.1:9090") }}
 {% if default(request.clash.dns, "") == "1" %}
 dns:
   enable: true
-  listen: :1053
+  prefer-h3: true
+  use-system-hosts: true
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://223.6.6.6/dns-query
+    - https://dns.alidns.com/dns-query
+    - tls://dns.alidns.com:853
+    - https://dns.pub/dns-query
+    - https://doh.pub/dns-query
+    - tls://dot.pub:853
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+  enhanced-mode: fake-ip
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~

@@ -1,7 +1,7 @@
 subconverter.exe
 .vscode
 cmake-build-debug
-.idea
+.idea/
 base/cache
 scripts/quickjspp
 scripts/yaml-cpp

@@ -5,6 +5,7 @@ import logging
 import os
 import shutil
 import stat
+import urllib.request
 from git import InvalidGitRepositoryError, Repo
 
 
@@ -64,15 +65,24 @@ def main():
 
         repo_path = os.path.join("./tmp/repo/", repo)
 
+        only_download_url = False
+        if url.endswith('.txt'):
+            only_download_url = True
         r = open_repo(repo_path)
         if r is None:
             logging.info(f"cloning repo {url} to {repo_path}")
-            r = Repo.clone_from(url, repo_path)
+            if only_download_url:
+                os.makedirs(repo_path, exist_ok=True)
+                urllib.request.urlretrieve(url, os.path.join(repo_path, os.path.basename(url)))
+            else:
+                r = Repo.clone_from(url, repo_path, depth=1)
         else:
             logging.info(f"repo {repo_path} exists")
             
         try:
-            if commit is not None:
+            if only_download_url:
+                logging.info(f"only download url, skip update")
+            elif commit is not None:
                 logging.info(f"checking out to commit {commit}")
                 r.git.checkout(commit)
             elif branch is not None:
