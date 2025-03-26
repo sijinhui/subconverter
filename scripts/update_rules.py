@@ -3,9 +3,11 @@ import configparser
 import glob
 import logging
 import os
+import re
 import shutil
 import stat
 import urllib.request
+import pathlib
 from git import InvalidGitRepositoryError, Repo
 
 
@@ -100,5 +102,45 @@ def main():
     shutil.rmtree("./tmp", ignore_errors=True)
 
 
+def is_binary_file(file_path):
+    """检查文件是否为二进制文件"""
+    try:
+        # 读取文件前1024字节，检测空字符
+        with file_path.open('rb') as f:
+            return b'\x00' in f.read(1024)
+    except IOError:
+        return True
+def find_matching_lines(root_dir, search_text):
+    root_path = pathlib.Path(root_dir)
+    not_comment_pattern = re.compile(r'^\s*#')  # 匹配注释行的正则表达式
+    results = []
+    comment_pattern = re.compile(r'%s[^,"]+' % search_text)
+
+    for file_path in root_path.rglob('*'):
+        if file_path.is_file() and not is_binary_file(file_path):
+            try:
+                with file_path.open('r', encoding='utf-8') as f:
+                    for line_num, line in enumerate(f, 1):
+                        line = line.rstrip('\n')
+                        # 检查是否包含目标文本（不区分大小写）且不是注释行
+                        if (search_text.lower() in line.lower() and
+                            not not_comment_pattern.match(line)):
+                            r = re.findall(comment_pattern, line)
+                            results.extend(r)
+            except (UnicodeDecodeError, IOError):
+                continue
+    return results
+def clean_not_used_rules():
+    import pathlib
+    try:
+        used_rules = (find_matching_lines('base/snippets', 'rules/'))
+        for file in pathlib.Path('base/rules').rglob('*'):
+            if file.is_file() and str(file.relative_to('base')) not in used_rules:
+                file.unlink()
+    except Exception as e:
+        logging.error(f"clean_not_used_rules failed {e}")
+
+
 if __name__ == "__main__":
     main()
+    clean_not_used_rules()
