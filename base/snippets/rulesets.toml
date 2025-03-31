@@ -24,9 +24,9 @@ ruleset = "rules/BlockNetworkCustom.list"
 #ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
 #interval = 86400
 
-[[rulesets]]
-group = "🛑 全球拦截"
-ruleset = "rules/DivineEngine/Surge/Ruleset/Guard/Hijacking.list"
+#[[rulesets]]
+#group = "🛑 全球拦截"
+#ruleset = "rules/DivineEngine/Surge/Ruleset/Guard/Hijacking.list"
 
 #[[rulesets]]
 #group = "🎯 全球直连"

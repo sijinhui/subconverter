@@ -1,12 +1,13 @@
 [[custom_groups]]
 name = "🔰 节点选择"
 type = "select"
-rule = ["[]♻️ 自动选择", "[]服务器用灾备", "[]🎯 全球直连", "^(?!.*【备用】).*", "[]💾 备用",]
+rule = ["[]♻️ 自动选择", "[]💾 备用", "[]服务器用灾备", ".*"]
+# "^(?!.*【备用】).*"
 
 [[custom_groups]]
 name = "♻️ 自动选择"
 type = "url-test"
-rule = ["^(?!.*【备用】)(?!.*self).*", ]
+rule = [".*", ]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
 lazy = false
@@ -101,10 +102,10 @@ name = "🎯 全球直连"
 type = "select"
 rule = ["[]DIRECT"]
 
-[[custom_groups]]
-name = "🛑 全球拦截"
-type = "select"
-rule = ["[]REJECT", "[]DIRECT"]
+#[[custom_groups]]
+#name = "🛑 全球拦截"
+#type = "select"
+#rule = ["[]REJECT", "[]DIRECT"]
 
 #[[custom_groups]]
 #name = "⛔️ 广告拦截"
@@ -125,7 +126,7 @@ rule = ["[]REJECT", "[]DIRECT"]
 [[custom_groups]]
 name = "服务器用灾备"
 type = "fallback"
-rule = ["s801", "下载", "[]💾 备用"]
+rule = ["s801", "下载"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 300
 tolerance = 100
