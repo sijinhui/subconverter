@@ -8,7 +8,8 @@ import shutil
 import stat
 import urllib.request
 import pathlib
-from git import InvalidGitRepositoryError, Repo
+import tempfile
+from git import InvalidGitRepositoryError, Repo, GitCommandError
 
 
 def del_rw(action, name: str, exc):
@@ -54,52 +55,73 @@ def main():
     config.read(args.config)
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
 
-    for section in config.sections():
-        repo = config.get(section, "name", fallback=section)
-        url = config.get(section, "url")
-        commit = config.get(section, "commit", fallback=None)
-        branch = config.get(section, "branch", fallback=None)
-        matches = config.get(section, "match").split("|")
-        save_path = config.get(section, "dest", fallback=f"base/rules/{repo}")
-        keep_tree = config.getboolean(section, "keep_tree", fallback=True)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        print("临时目录路径:", tmpdir)
 
-        logging.info(f"reading files from url {url}, matches {matches}, save to {save_path} keep_tree {keep_tree}")
+        for section in config.sections():
+            repo = config.get(section, "name", fallback=section)
+            url = config.get(section, "url")
+            commit = config.get(section, "commit", fallback=None)
+            branch = config.get(section, "branch", fallback=None)
+            matches = config.get(section, "match").split("|")
+            save_path = config.get(section, "dest", fallback=f"base/rules/{repo}")
+            keep_tree = config.getboolean(section, "keep_tree", fallback=True)
 
-        repo_path = os.path.join("./tmp/repo/", repo)
+            logging.info(f"reading files from url {url}, matches {matches}, save to {save_path} keep_tree {keep_tree}")
 
-        only_download_url = False
-        if url.endswith('.txt'):
-            only_download_url = True
-        r = open_repo(repo_path)
-        if r is None:
-            logging.info(f"cloning repo {url} to {repo_path}")
-            if only_download_url:
-                os.makedirs(repo_path, exist_ok=True)
-                urllib.request.urlretrieve(url, os.path.join(repo_path, os.path.basename(url)))
+            repo_path = os.path.join(tmpdir, "repo", repo)
+
+            only_download_url = False
+            if url.endswith('.txt'):
+                only_download_url = True
+            r = open_repo(repo_path)
+            if r is None:
+                logging.info(f"cloning repo {url} to {repo_path}")
+                if only_download_url:
+                    os.makedirs(repo_path, exist_ok=True)
+                    urllib.request.urlretrieve(url, os.path.join(repo_path, os.path.basename(url)))
+                else:
+                    r = Repo.clone_from(url, repo_path, depth=1)
             else:
-                r = Repo.clone_from(url, repo_path, depth=1)
-        else:
-            logging.info(f"repo {repo_path} exists")
-            
-        try:
-            if only_download_url:
-                logging.info(f"only download url, skip update")
-            elif commit is not None:
-                logging.info(f"checking out to commit {commit}")
-                r.git.checkout(commit)
-            elif branch is not None:
-                logging.info(f"checking out to branch {branch}")
-                r.git.checkout(branch)
-            else:
-                logging.info(f"checking out to default branch")
-                r.active_branch.checkout()
-        except Exception as e:
-            logging.error(f"checkout failed {e}")
-            continue
+                logging.info(f"repo {repo_path} exists")
 
-        update_rules(repo_path, save_path, matches, keep_tree)
+            try:
+                # 2. 获取远程默认分支
+                default_remote_branch = r.git.symbolic_ref("refs/remotes/origin/HEAD").split("/")[-1]
+                logging.info(f"远程默认分支: {default_remote_branch}")
+            except GitCommandError:
+                # 如果远程没有默认分支（极少见）
+                default_remote_branch = None
+                logging.error("无法获取远程默认分支")
 
-    shutil.rmtree("./tmp", ignore_errors=True)
+            try:
+                if only_download_url:
+                    logging.info(f"only download url, skip update")
+                elif commit is not None:
+                    logging.info(f"checking out to commit {commit}")
+                    r.git.checkout(commit)
+                elif branch is not None:
+                    if default_remote_branch == branch:
+                        logging.info(f"checking out to branch {branch}")
+                        r.git.checkout(branch)
+                    else:
+                        print(f"默认分支不是 {branch}，手动 fetch 并切换分支")
+
+                        # 4. fetch 目标分支（浅层）
+                        r.git.fetch("origin", f"{branch}", depth=1)
+
+                        # 5. 检出目标分支
+                        r.git.checkout(branch)
+                else:
+                    logging.info(f"checking out to default branch")
+                    r.active_branch.checkout()
+            except Exception as e:
+                logging.error(f"checkout failed {e}")
+                continue
+
+            update_rules(repo_path, save_path, matches, keep_tree)
+
+    # shutil.rmtree("./tmp", ignore_errors=True)
 
 
 def is_binary_file(file_path):
@@ -130,13 +152,23 @@ def find_matching_lines(root_dir, search_text):
             except (UnicodeDecodeError, IOError):
                 continue
     return results
+
+def remove_empty_directories(path):
+    path = pathlib.Path(path)
+    # 从底向上遍历，确保子目录先被处理
+    for child in sorted(path.rglob('*'), key=lambda x: len(x.parts), reverse=True):
+        if child.is_dir() and not any(child.iterdir()):
+            child.rmdir()
+            print(f"删除空文件夹: {child}")
+
 def clean_not_used_rules():
-    import pathlib
+
     try:
         used_rules = (find_matching_lines('base/snippets', 'rules/'))
         for file in pathlib.Path('base/rules').rglob('*'):
-            if file.is_file() and str(file.relative_to('base')) not in used_rules:
+            if file.is_file() and str(file.relative_to('base').as_posix()) not in used_rules:
                 file.unlink()
+        remove_empty_directories('base/rules')
     except Exception as e:
         logging.error(f"clean_not_used_rules failed {e}")
 
