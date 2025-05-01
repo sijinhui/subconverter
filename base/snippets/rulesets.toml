@@ -41,9 +41,9 @@ ruleset = "rules/BlockNetworkCustom.list"
 #group = "Ⓜ️"
 #ruleset = "rules/blackmatrix7/rule/Surge/Microsoft/Microsoft.list"
 
-#[[rulesets]]
-#group = "🎯 全球直连"
-#ruleset = "rules/blackmatrix7/rule/Surge/SteamCN/SteamCN.list"
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/blackmatrix7/rule/Surge/SteamCN/SteamCN.list"
 [[rulesets]]
 group = "🎯 全球直连"
 ruleset = "rules/ACL4SSR/Clash/ChinaDomain.list"
