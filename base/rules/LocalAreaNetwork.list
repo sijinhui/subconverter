@@ -1,0 +1,22 @@
+DOMAIN-SUFFIX,local
+IP-CIDR,192.168.0.0/16,no-resolve
+IP-CIDR,10.0.0.0/8,no-resolve
+IP-CIDR,172.16.0.0/12,no-resolve
+IP-CIDR,127.0.0.0/8,no-resolve
+IP-CIDR,100.64.0.0/10,no-resolve
+IP-CIDR6,::1/128,no-resolve
+IP-CIDR6,fc00::/7,no-resolve
+IP-CIDR6,fe80::/10,no-resolve
+IP-CIDR6,fd00::/8,no-resolve
+# 腾讯系的检测网址
+DOMAIN,otheve.beacon.qq.com
+# > ainnovation
+DOMAIN-SUFFIX,ainnovation.com
+DOMAIN-SUFFIX,ainnovation.cn
+# > xiaosi
+DOMAIN-SUFFIX,xiaosi.cc
+DOMAIN-SUFFIX,si.icu
+DOMAIN,xiaosi.cc
+DOMAIN,si.icu
+# 临时 租赁用
+# IP-CIDR,172.44.0.0/16,no-resolve
