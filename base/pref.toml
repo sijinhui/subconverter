@@ -128,7 +128,7 @@ sort_flag = false
 sort_script = '''
 function isChinese(text) {
     // 简单检查字符串是否包含汉字，这里假设汉字编码范围主要在\u4e00到\u9fff之间
-    return /^[\u4e00-\u9fff]/.test(text);
+    return /[\u4e00-\u9fff]/.test(text);
 }
 function containsDownload(text) {
     // 检查字符串是否包含“下载”两个字
@@ -172,7 +172,7 @@ function compare(node_a, node_b) {
    if (!aIsChinese && bIsChinese) {
     return false;
    }
-   return node_a.Remark.toLowerCase() < node_b.Remark.toLowerCase();
+   return node_a.Remark.toLowerCase() > node_b.Remark.toLowerCase();
 }
 '''
 
