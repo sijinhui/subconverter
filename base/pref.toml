@@ -126,53 +126,95 @@ sort_flag = false
 # Script used for sorting nodes. A "compare" function with 2 arguments which are the 2 nodes to be compared should be defined in the script. Supports inline script and script path.
 # Examples can be seen at the filter_script option in [common] section.
 sort_script = '''
+function extractNodeName(remark) {
+    // 通过空格分割，取最后一位来去除emoji和其他前缀
+    const parts = remark.trim().split(/\s+/);
+    return parts[parts.length - 1];
+}
+
 function isChinese(text) {
     // 简单检查字符串是否包含汉字，这里假设汉字编码范围主要在\u4e00到\u9fff之间
     return /[\u4e00-\u9fff]/.test(text);
 }
+
 function containsDownload(text) {
-    // 检查字符串是否包含“下载”两个字
+    // 检查字符串是否包含"下载"两个字
     return text.includes("下载");
 }
+
 function containsBei(text) {
-    // 检查字符串是否包含“备用”两个字
+    // 检查字符串是否包含"备用"两个字
     return text.includes("备用");
 }
-function compare(node_a, node_b) {
 
-    // 备用在后
+function naturalSort(a, b) {
+    // 自然排序，支持数字和字母混合排序
+    const regex = /(\d+|\D+)/g;
+    const aParts = a.match(regex) || [];
+    const bParts = b.match(regex) || [];
+
+    const maxLength = Math.max(aParts.length, bParts.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        const aPart = aParts[i] || '';
+        const bPart = bParts[i] || '';
+
+        // 如果都是数字，按数字大小比较
+        if (/^\d+$/.test(aPart) && /^\d+$/.test(bPart)) {
+            const diff = parseInt(aPart, 10) - parseInt(bPart, 10);
+            if (diff !== 0) {
+                return diff;
+            }
+        } else {
+            // 否则按字符串比较
+            const diff = aPart.toLowerCase().localeCompare(bPart.toLowerCase());
+            if (diff !== 0) {
+                return diff;
+            }
+        }
+    }
+
+    return 0;
+}
+
+function compare(node_a, node_b) {
+    // 提取处理后的节点名称
+    const remarkA = extractNodeName(node_a.Remark);
+    const remarkB = extractNodeName(node_b.Remark);
+
+    // 1. 备用节点优先级最低（排在最后）
     const aContainsBei = containsBei(node_a.Remark);
     const bContainsBei = containsBei(node_b.Remark);
 
-    if (aContainsBei && !bContainsBei) {
-        return false; // 如果 a 包含“下载”而 b 不包含，则 a 应该排在 b 后面
-    }
-    if (!aContainsBei && bContainsBei) {
-        return true; // 如果 b 包含“下载”而 a 不包含，则 a 应该排在 b 前面
+    if (aContainsBei !== bContainsBei) {
+        return aContainsBei ? false : true; // 备用的排在后面，返回false表示a在后
     }
 
-    // 下载在后
+    // 2. 包含"下载"的节点次后
     const aContainsDownload = containsDownload(node_a.Remark);
     const bContainsDownload = containsDownload(node_b.Remark);
 
-    if (aContainsDownload && !bContainsDownload) {
-        return false; // 如果 a 包含“下载”而 b 不包含，则 a 应该排在 b 后面
-    }
-    if (!aContainsDownload && bContainsDownload) {
-        return true; // 如果 b 包含“下载”而 a 不包含，则 a 应该排在 b 前面
+    if (aContainsDownload !== bContainsDownload) {
+        return aContainsDownload ? false : true; // 包含下载的排在后面，返回false表示a在后
     }
 
-   // 汉字在前
-   const aIsChinese = isChinese(node_a.Remark);
-   const bIsChinese = isChinese(node_b.Remark);
+    // 3. 英文在前，汉字在后
+    const aIsChinese = isChinese(node_a.Remark);
+    const bIsChinese = isChinese(node_b.Remark);
 
-   if (aIsChinese && !bIsChinese) {
-    return true;
-   }
-   if (!aIsChinese && bIsChinese) {
-    return false;
-   }
-   return node_a.Remark.toLowerCase() > node_b.Remark.toLowerCase();
+    if (aIsChinese !== bIsChinese) {
+        return aIsChinese ? false : true; // 汉字排在后面，返回false表示a在后
+    }
+
+    // 4. 最后按照数字或字母从小到大排序（自然排序）
+    const sortResult = naturalSort(remarkA, remarkB);
+    if (sortResult < 0) {
+        return true; // a应该在前面
+    } else if (sortResult > 0) {
+        return false; // a应该在后面
+    } else {
+        return true; // 相等时保持原顺序，返回true表示a在前
+    }
 }
 '''
 
