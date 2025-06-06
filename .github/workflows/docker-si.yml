@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: registry.ap-northeast-1.aliyuncs.com/sijinhui/ssr/subconverter
+          images: registry.ap-northeast-1.aliyuncs.com/sijinhui/subconverter
           tags: |
             type=raw,value=latest
             type=ref,event=tag
