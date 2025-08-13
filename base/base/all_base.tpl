@@ -16,7 +16,6 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - https://223.6.6.6/dns-query
     - https://dns.alidns.com/dns-query
     - tls://dns.alidns.com:853
     - https://dns.pub/dns-query
