@@ -106,12 +106,9 @@ def main():
                         r.git.checkout(branch)
                     else:
                         print(f"默认分支不是 {branch}，手动 fetch 并切换分支")
+                        r.git.fetch("origin", f"+refs/heads/{branch}:refs/remotes/origin/{branch}", "--depth=1")
+                        r.git.checkout('-b', branch, f'origin/{branch}')
 
-                        # 4. fetch 目标分支（浅层）
-                        r.git.fetch("origin", f"{branch}", depth=1)
-
-                        # 5. 检出目标分支
-                        r.git.checkout(branch)
                 else:
                     logging.info(f"checking out to default branch")
                     r.active_branch.checkout()
