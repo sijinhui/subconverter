@@ -54,9 +54,13 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
-interval = 86400
+ruleset = "rules/ACL4SSR/Clash/Ruleset/Apple.list"
 
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://fastly.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+interval = 86400
 
 #[[rulesets]]
 #group = "🎯 全球直连"
