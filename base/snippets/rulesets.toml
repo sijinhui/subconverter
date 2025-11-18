@@ -61,6 +61,7 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/Apple.list"
 group = "🎯 全球直连"
 ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
 interval = 86400
+# https://jsd.onmicrosoft.cn/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt
 
 #[[rulesets]]
 #group = "🎯 全球直连"
