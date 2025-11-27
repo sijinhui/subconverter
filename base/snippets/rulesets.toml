@@ -3,7 +3,7 @@ group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
 [[rulesets]]
 group = "🎯 全球直连"
-ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
 interval = 86400
 
 #[[rulesets]]
@@ -21,7 +21,7 @@ ruleset = "rules/BlockNetworkCustom.list"
 # 太长了先禁用
 #[[rulesets]]
 #group = "🛑 全球拦截"
-#ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
+#ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/reject.txt"
 #interval = 86400
 
 #[[rulesets]]

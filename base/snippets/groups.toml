@@ -16,7 +16,7 @@ tolerance = 100
 [[custom_groups]]
 name = "💾 备用"
 type = "url-test"
-rule = ["【备用】.*"]
+rule = ["【备用.*"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
 lazy = false

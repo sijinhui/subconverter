@@ -58,13 +58,13 @@ ruleset = "rules/LocalAreaNetwork.list"
 
 #[[rulesets]]
 #group = "🎯 全球直连"
-#ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+#ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
 #interval = 86400
 
 [[rulesets]]
 group = "🎯 全球直连"
 #ruleset = "rules/custom-direct/direct.txt"
-ruleset = "https://jsd-mirror.xiaosi.cc/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
+ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
 interval = 86400
 
 [[rulesets]]
