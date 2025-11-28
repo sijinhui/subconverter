@@ -147,6 +147,16 @@ function containsBei(text) {
     return text.includes("备用");
 }
 
+// 【新增】提取备用等级数字，如果没有数字则返回 0
+function getBeiLevel(text) {
+    const match = text.match(/【备用(\d+)】/);
+    if (match) {
+        return parseInt(match[1], 10);
+    }
+    // 如果包含“备用”字样但没数字（防止漏网），视为最大等级或按需处理，这里暂定为0
+    return 0;
+}
+
 function naturalSort(a, b) {
     // 自然排序，支持数字和字母混合排序
     const regex = /(\d+|\D+)/g;
@@ -179,35 +189,48 @@ function naturalSort(a, b) {
 
 function compare(node_a, node_b) {
     // 提取处理后的节点名称
-    const remarkA = extractNodeName(node_a.Remark);
-    const remarkB = extractNodeName(node_b.Remark);
+    const remarkA_Full = node_a.Remark;
+    const remarkB_Full = node_b.Remark;
+    //const remarkA = extractNodeName(node_a.Remark);
+    //const remarkB = extractNodeName(node_b.Remark);
 
     // 1. 备用节点优先级最低（排在最后）
-    const aContainsBei = containsBei(node_a.Remark);
-    const bContainsBei = containsBei(node_b.Remark);
+    // 这里结合了正则提取的等级和简单的文字包含判断
+    const levelA = getBeiLevel(remarkA_Full);
+    const levelB = getBeiLevel(remarkB_Full);
+    const isBeiA = levelA > 0 || containsBei(remarkA_Full);
+    const isBeiB = levelB > 0 || containsBei(remarkB_Full);
 
-    if (aContainsBei !== bContainsBei) {
-        return aContainsBei ? false : true; // 备用的排在后面，返回false表示a在后
+    if (isBeiA !== isBeiB) {
+        return isBeiA ? false : true; // A是备用则排后面(false)，否则排前面(true)
+    }
+
+    // 2. 【新增关键逻辑】如果都是备用节点，按数字等级从小到大排序 (1 -> 2 -> 3)
+    // 这一步必须在“中英文排序”之前执行
+    if (isBeiA && isBeiB) {
+        if (levelA !== levelB) {
+            return levelA < levelB; // 等级小的在前 (1 在 3 前)
+        }
     }
 
     // 2. 包含"下载"的节点次后
-    const aContainsDownload = containsDownload(node_a.Remark);
-    const bContainsDownload = containsDownload(node_b.Remark);
+    const aContainsDownload = containsDownload(remarkA_Full);
+    const bContainsDownload = containsDownload(remarkB_Full);
 
     if (aContainsDownload !== bContainsDownload) {
         return aContainsDownload ? false : true; // 包含下载的排在后面，返回false表示a在后
     }
 
     // 3. 英文在前，汉字在后
-    const aIsChinese = isChinese(node_a.Remark);
-    const bIsChinese = isChinese(node_b.Remark);
+    const aIsChinese = isChinese(remarkA_Full);
+    const bIsChinese = isChinese(remarkB_Full);
 
     if (aIsChinese !== bIsChinese) {
         return aIsChinese ? false : true; // 汉字排在后面，返回false表示a在后
     }
 
     // 4. 最后按照数字或字母从小到大排序（自然排序）
-    const sortResult = naturalSort(remarkA, remarkB);
+    const sortResult = naturalSort(remarkA_Full, remarkB_Full);
     if (sortResult < 0) {
         return true; // a应该在前面
     } else if (sortResult > 0) {
