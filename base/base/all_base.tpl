@@ -26,7 +26,7 @@ dns:
     - "*"
     - "+.lan"
     - "+.local"
-  enhanced-mode: fake-ip
+  enhanced-mode: redir-host
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
