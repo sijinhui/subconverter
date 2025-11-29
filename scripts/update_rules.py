@@ -11,6 +11,9 @@ import pathlib
 import tempfile
 from git import InvalidGitRepositoryError, Repo, GitCommandError
 
+from sys import stdout
+stdout.reconfigure(encoding='utf-8')
+
 
 def del_rw(action, name: str, exc):
     os.chmod(name, stat.S_IWRITE)
@@ -56,7 +59,7 @@ def main():
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        print("临时目录路径:", tmpdir)
+        # print("临时目录路径:", tmpdir)
 
         for section in config.sections():
             repo = config.get(section, "name", fallback=section)
