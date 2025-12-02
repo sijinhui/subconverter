@@ -13,14 +13,13 @@ dns:
   prefer-h3: true
   use-system-hosts: true
   default-nameserver:
-    - 223.5.5.5
     - 119.29.29.29
+    - 223.5.5.5
   nameserver:
+    - https://doh.pub/dns-query
+    - tls://dot.pub
     - https://dns.alidns.com/dns-query
     - tls://dns.alidns.com:853
-    - https://dns.pub/dns-query
-    - https://doh.pub/dns-query
-    - tls://dot.pub:853
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
