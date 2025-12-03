@@ -1,11 +1,11 @@
 # short names
-[[rename_node]]
-match = '^(.*?)c92s4\.(.*?)$'
-replace = "海外节点1-JP"
-
-[[rename_node]]
-match = '^(.*?)c716s4\.(.*?)$'
-replace = "海外节点2-HK"
+#[[rename_node]]
+#match = '^(.*?)c92s4\.(.*?)$'
+#replace = "海外节点1-JP"
+#
+#[[rename_node]]
+#match = '^(.*?)c716s4\.(.*?)$'
+#replace = "海外节点2-HK"
 
 [[rename_node]]
 match = '^(.*?)c92s801\.(.*?)$'
@@ -15,13 +15,25 @@ replace = "下载专用节点1-US"
 match = '^(.*?)c716s801\.(.*?)$'
 replace = "下载专用节点2-HK"
 
-[[rename_node]]
-match = '^(.*?)c716(s\d+)\.(.*?)$'
-replace = "HK-$2"
+#[[rename_node]]
+#match = '^(.*?)c716(s\d+)\.(.*?)$'
+#replace = "HK-$2"
+#
+#[[rename_node]]
+#match = '^(.*?)c92(s\d+)\.(.*?)$'
+#replace = "US-$2"
 
 [[rename_node]]
-match = '^(.*?)c92(s\d+)\.(.*?)$'
-replace = "US-$2"
+match = '^(.*?)c(\d+)s4\.(.*?)$'
+replace = "JP-软银-$2"
+
+[[rename_node]]
+match = '^(.*?)c(\d+)s5\.(.*?)$'
+replace = "NL-三网CN2GIA-$2"
+
+[[rename_node]]
+match = '^(.*?)c(\d+)(s[123])\.(.*?)$'
+replace = "US-电信优化-$2"
 
 #[[rename_node]]
 #match = '^c92s4\.(.*?)$'
