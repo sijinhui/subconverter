@@ -924,6 +924,9 @@ void explodeTrojan(std::string trojan, Proxy &node) {
 
     host = getUrlArg(addition, "sni");
     sni = getUrlArg(addition, "sni");
+    host = getUrlArg(addition, "host");
+    if (host.empty())
+        host = sni;
     if (host.empty())
         host = getUrlArg(addition, "peer");
     tfo = getUrlArg(addition, "tfo");

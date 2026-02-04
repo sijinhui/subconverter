@@ -1057,6 +1057,13 @@ std::string proxyToSurge(std::vector<Proxy> &nodes, const std::string &base_conf
                 } else if (!host.empty()) {
                     proxy += ", sni=" + host;
                 }
+                if (transproto == "ws") {
+                    proxy += ", ws=true, ws-path=" + path;
+                    if (!host.empty())
+                        headers.push_back("Host:\"" + host + "\"");
+                    if (!headers.empty())
+                        proxy += ", ws-headers=" + join(headers, "|");
+                }
                 if (!scv.is_undef())
                     proxy += ", skip-cert-verify=" + scv.get_str();
                 break;
