@@ -335,6 +335,11 @@ proxyToClash(std::vector<Proxy> &nodes, YAML::Node &yamlnode, const ProxyGroupCo
                                 singleproxy["ws-headers"]["Host"] = x.Host;
                             if (!x.Edge.empty())
                                 singleproxy["ws-headers"]["Edge"] = x.Edge;
+                            singleproxy["ws-opts"]["path"] = x.Path;
+                            if (!x.Host.empty())
+                                singleproxy["ws-opts"]["headers"]["Host"] = x.Host;
+                            if (!x.Edge.empty())
+                                singleproxy["ws-opts"]["headers"]["Edge"] = x.Edge;
                         }
                         break;
                     case "http"_hash:
@@ -658,6 +663,14 @@ proxyToClash(std::vector<Proxy> &nodes, YAML::Node &yamlnode, const ProxyGroupCo
                                 singleproxy["ws-headers"]["Host"] = x.Host;
                             if (!x.Edge.empty())
                                 singleproxy["ws-headers"]["Edge"] = x.Edge;
+                            singleproxy["ws-opts"]["path"] = x.Path;
+                            if (!x.Host.empty())
+                                singleproxy["ws-opts"]["headers"]["Host"] = x.Host;
+                            if (!x.Edge.empty())
+                                singleproxy["ws-opts"]["headers"]["Edge"] = x.Edge;
+                            if (!x.V2rayHttpUpgrade.is_undef()) {
+                                singleproxy["ws-opts"]["v2ray-http-upgrade"] = x.V2rayHttpUpgrade.get();
+                            }
                         }
                         break;
                     case "http"_hash:
