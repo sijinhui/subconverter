@@ -705,6 +705,8 @@ proxyToClash(std::vector<Proxy> &nodes, YAML::Node &yamlnode, const ProxyGroupCo
         // sees in https://dreamacro.github.io/clash/configuration/outbound.html#snell
         if (udp && x.Type != ProxyType::Snell && x.Type != ProxyType::TUIC)
             singleproxy["udp"] = true;
+        if (!clashR && !x.UnderlyingProxy.empty())
+            singleproxy["dialer-proxy"] = x.UnderlyingProxy;
         if (proxy_block)
             singleproxy.SetStyle(YAML::EmitterStyle::Block);
         else
@@ -2959,6 +2961,9 @@ proxyToSingBox(std::vector<Proxy> &nodes, rapidjson::Document &json,
                 }
             }
             proxy.AddMember("tls", tls, allocator);
+        }
+        if (!x.UnderlyingProxy.empty()) {
+            proxy.AddMember("detour", rapidjson::Value(x.UnderlyingProxy.c_str(), allocator), allocator);
         }
         if (!udp.is_undef() && !udp) {
             proxy.AddMember("network", "tcp", allocator);
