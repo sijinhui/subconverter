@@ -2,9 +2,8 @@
 group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
 [[rulesets]]
-group = "🎯 全球直连"
-ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
-interval = 86400
+group = "🔰 节点选择"
+ruleset = "rules/BlockNetworkCustom.list"
 
 #[[rulesets]]
 #group = "🎯 全球直连"
@@ -56,7 +55,10 @@ ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
 group = "🎯 全球直连"
 ruleset = "rules/ACL4SSR/Clash/Ruleset/Apple.list"
 
-
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
+interval = 86400
 [[rulesets]]
 group = "🎯 全球直连"
 ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
