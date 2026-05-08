@@ -1,0 +1,15 @@
+services:
+  subconverter:
+    build:
+      context: .
+      dockerfile: scripts/Dockerfile
+    image: registry.cn-hangzhou.aliyuncs.com/sijinhui/subconverter:latest
+    container_name: subconverter
+    restart: always
+    network_mode: host
+    volumes:
+      - si-api-go_shared-tmp:/tmp
+
+volumes:
+  si-api-go_shared-tmp:
+    external: true

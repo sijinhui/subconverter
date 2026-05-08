@@ -221,15 +221,7 @@ function compare(node_a, node_b) {
         return aContainsDownload ? false : true; // 包含下载的排在后面，返回false表示a在后
     }
 
-    // 3. 英文在前，汉字在后
-    const aIsChinese = isChinese(remarkA_Full);
-    const bIsChinese = isChinese(remarkB_Full);
-
-    if (aIsChinese !== bIsChinese) {
-        return aIsChinese ? false : true; // 汉字排在后面，返回false表示a在后
-    }
-
-    // 4. 最后按照数字或字母从小到大排序（自然排序）
+    // 3. 最后按照数字或字母从小到大排序（自然排序）
     const sortResult = naturalSort(remarkA_Full, remarkB_Full);
     if (sortResult < 0) {
         return true; // a应该在前面
