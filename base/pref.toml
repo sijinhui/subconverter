@@ -289,6 +289,15 @@ function compare(node_a, node_b) {
         return aContainsDownload ? false : true; // 包含下载的排在后面，返回false表示a在后
     }
 
+    // 2.1 如果都是下载节点，直接按完整名称排序（让 下载节点1 排在 下载节点2 前面）
+    // 必须在“旗帜排序”之前执行，否则会被国旗字母顺序(HK 在 US 前)打乱节点编号顺序
+    if (aContainsDownload && bContainsDownload) {
+        const downloadCompare = compareMixedText(removeLeadingFlagEmoji(remarkA_Full), removeLeadingFlagEmoji(remarkB_Full));
+        if (downloadCompare !== 0) {
+            return downloadCompare < 0;
+        }
+    }
+
     // 3. 不带【】前缀的节点排在前面（优先于带【】前缀的）
     const aHasBrackets = hasBrackets(remarkA_Full);
     const bHasBrackets = hasBrackets(remarkB_Full);
