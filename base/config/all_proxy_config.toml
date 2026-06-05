@@ -22,8 +22,16 @@ clash_rule_base = "base/all_base.tpl"
 #include_remarks = []
 #exclude_remarks = []
 
+import = "snippets/rename_node.toml"
+
 #[[custom_groups]]
 #import = "snippets/groups_forcerule.toml"
+[[custom_groups]]
+name = "🔰 节点选择"
+type = "select"
+rule = [
+    "[]服务器用灾备"
+]
 
 [[custom_groups]]
 name = "服务器用灾备"
@@ -49,36 +57,11 @@ rule = ["[]DIRECT"]
 name = "🐟 漏网之鱼"
 type = "select"
 rule = ["[]服务器用灾备"]
-#
-#[[rulesets]]
-#import = "snippets/all_proxy_rulesets.toml"
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/LocalAreaNetwork.list"
-
-#[[rulesets]]
-#group = "🎯 全球直连"
-#ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/private.txt"
-#interval = 86400
 
 [[rulesets]]
-group = "🎯 全球直连"
-#ruleset = "rules/custom-direct/direct.txt"
-ruleset = "https://cdn.jsdmirror.com/gh/Loyalsoldier/surge-rules@release/ruleset/direct.txt"
-interval = 86400
-
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "[]GEOIP,CN"
-
-[[rulesets]]
-group = "🐟 漏网之鱼"
-ruleset = "[]FINAL"
-
-
-#[[rulesets]]
-#import = ""
+import = "snippets/rulesets.toml"
 
 [[template_args]]
 key = "clash.dns.port"
 value = "5353"
+
