@@ -36,15 +36,14 @@ rule = [
 [[custom_groups]]
 name = "服务器用灾备"
 type = "fallback"
-rule = ["s801", "下载", "[]💾 备用"]
+rule = ["s801", "下载", "[]💾 备用", "[]DIRECT"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 300
-tolerance = 200
 
 [[custom_groups]]
 name = "💾 备用"
 type = "url-test"
-rule = [".*", "[]🎯 全球直连"]
+rule = [".*"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
 
@@ -64,4 +63,3 @@ import = "snippets/rulesets.toml"
 [[template_args]]
 key = "clash.dns.port"
 value = "5353"
-
