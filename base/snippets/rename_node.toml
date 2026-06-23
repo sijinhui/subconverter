@@ -32,12 +32,12 @@ match = '^(.*?)c70s5\.(.*?)$'
 replace = "NL-三网CN2GIA-70"
 
 [[rename_node]]
-match = '^(.*?)c70(s[123])\.(.*?)$'
-replace = "US-电信优化-70"
+match = '^(.*?)c70s([12345])\.(.*?)$'
+replace = "US-电信优化-70 $2"
 
 [[rename_node]]
-match = '^(.*?)c720(s[123])\.(.*?)$'
-replace = "HK-720"
+match = '^(.*?)c720s([12345])\.(.*?)$'
+replace = "HK-720 $2"
 
 #[[rename_node]]
 #match = '^c92s4\.(.*?)$'
