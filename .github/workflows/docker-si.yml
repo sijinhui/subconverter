@@ -1,51 +1,61 @@
-name: Publish Docker Image
+name: Build and Push Docker Image
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-  release:
-    types: [published]
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  IMAGE_NAME: sijinhui/subconverter
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cn-hangzhou.aliyuncs.com
-          username: ${{ secrets.ALY_HUB_USERNAME }}
-          password: ${{ secrets.ALY_HUB_PASSWORD }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: registry.cn-hangzhou.aliyuncs.com/sijinhui/subconverter
-          tags: |
-            type=raw,value=latest
-            type=ref,event=tag
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Log in to Aliyun Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.ALIYUN_REGISTRY_USERNAME }}
+          password: ${{ secrets.ALIYUN_REGISTRY_PASSWORD }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
+
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./scripts/Dockerfile  # 指定使用 Dockerfile.database 文件
+          file: ./scripts/Dockerfile
           platforms: linux/amd64
-          push: true
-          provenance: false
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          provenance: false
+          sbom: false
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
