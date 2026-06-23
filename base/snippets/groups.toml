@@ -15,7 +15,7 @@ name = "♻️ 自动选择"
 type = "url-test"
 rule = [
 #    "[]💾 备用1",
-    "^(?!.*(self|JB-ISP)).*",
+    "^(?!.*(self|GB-ISP)).*",
 ]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
