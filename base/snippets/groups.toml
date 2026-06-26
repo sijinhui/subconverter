@@ -3,10 +3,11 @@ name = "🔰 节点选择"
 type = "select"
 rule = [
     "[]♻️ 自动选择",
-#    "[]💾 备用1",
+    "[]💾 mitce",
 #    "[]服务器用灾备",
 #    "^(?!.*(备用1)).*",
-    ".*"
+    "^(?!.*(mitce)).*",
+#    ".*"
 ]
 # "^(?!.*【备用】).*"
 
@@ -14,9 +15,20 @@ rule = [
 name = "♻️ 自动选择"
 type = "url-test"
 rule = [
-#    "[]💾 备用1",
-    "^(?!.*(self|GB-ISP)).*",
+    "[]💾 mitce",
+    "^(?!.*(self|mitce)).*",
 ]
+url = "http://www.google-analytics.com/generate_204"
+interval = 120
+lazy = false
+tolerance = 150
+
+
+[[custom_groups]]
+name = "💾 mitce"
+#type = "select"
+type = "url-test"
+rule = ["【mitce.*"]
 url = "http://www.google-analytics.com/generate_204"
 interval = 120
 lazy = false
