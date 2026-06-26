@@ -9,6 +9,7 @@ services:
     network_mode: host
     volumes:
       - si-api-go_shared-tmp:/tmp
+      - ./base:/base
 
 volumes:
   si-api-go_shared-tmp:
