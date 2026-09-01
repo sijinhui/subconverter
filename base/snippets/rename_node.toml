@@ -25,15 +25,15 @@ replace = "下载专用节点-HK"
 
 [[rename_node]]
 match = '^(.*?)c(\d{2})s4\.(.*?)$'
-replace = "JP-软银-$1"
+replace = "JP-软银-$2"
 
 [[rename_node]]
 match = '^(.*?)c(\d{2})s5\.(.*?)$'
-replace = "NL-三网CN2GIA-$1"
+replace = "NL-三网CN2GIA-$2"
 
 [[rename_node]]
 match = '^(.*?)c(\d{2})s([12345])\.(.*?)$'
-replace = "US-电信优化-$1-$2"
+replace = "US-电信优化-$2-$3"
 
 [[rename_node]]
 match = '^(.*?)c720s([12345])\.(.*?)$'
