@@ -1852,7 +1852,7 @@ void explodeStdMieru(std::string mieru, Proxy &node) {
 }
 
 void explodeStdHysteria2(std::string hysteria2, Proxy &node) {
-    std::string add, port, password, host, insecure, up, down, alpn, obfsParam, obfsPassword, remarks, sni, ports;
+    std::string add, port, password, host, insecure, up, down, alpn, obfsParam, obfsPassword, remarks, ports;
     std::string fingerprint;
     std::string addition;
     tribool scv;
@@ -1870,8 +1870,9 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node) {
     if (strFind(hysteria2, "@")) {
         if (regGetMatch(hysteria2, R"(^(.*?)@(.*)[:](\d+)$)", 4, 0, &password, &add, &port))
             return;
+        password = urlDecode(password);
     } else {
-        password = getUrlArg(addition, "password");
+        password = urlDecode(getUrlArg(addition, "password"));
         if (password.empty())
             return;
 
@@ -1886,12 +1887,11 @@ void explodeStdHysteria2(std::string hysteria2, Proxy &node) {
     up = getUrlArg(addition, "up");
     down = getUrlArg(addition, "down");
     alpn = getUrlAlpn(addition);
-    obfsParam = getUrlArg(addition, "obfs");
-    obfsPassword = getUrlArg(addition, "obfs-password");
-    host = getUrlArg(addition, "sni");
-    sni = getUrlArg(addition, "sni");
+    obfsParam = urlDecode(getUrlArg(addition, "obfs"));
+    obfsPassword = urlDecode(getUrlArg(addition, "obfs-password"));
+    host = urlDecode(getUrlArg(addition, "sni"));
     ports = getUrlArg(addition, "ports");
-    fingerprint = getUrlArg(addition, "pinSHA256");
+    fingerprint = urlDecode(getUrlArg(addition, "pinSHA256"));
     if (remarks.empty())
         remarks = add + ":" + port;
 
