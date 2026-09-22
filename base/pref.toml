@@ -154,13 +154,6 @@ function extractLeadingFlagEmoji(text) {
     return match ? match[1] : '';
 }
 
-function extractFirstNumberText(text) {
-    // 提取节点名中的第一个数字段，用于同一个旗帜内排序
-    const name = removeLeadingFlagEmoji(text).replace(/^【[^】]+】\s*/, '');
-    const match = name.match(/\d+/);
-    return match ? match[0] : '';
-}
-
 function isChinese(text) {
     // 简单检查字符串是否包含汉字，这里假设汉字编码范围主要在\u4e00到\u9fff之间
     return /[\u4e00-\u9fff]/.test(text);
@@ -322,24 +315,7 @@ function compare(node_a, node_b) {
         return flagCompare < 0;
     }
 
-    // 6. 同一个旗帜内，按提取到的第一个数字大小排序
-    const numberA = extractFirstNumberText(remarkA_Full);
-    const numberB = extractFirstNumberText(remarkB_Full);
-    if (numberA !== '' || numberB !== '') {
-        if (numberA === '') {
-            return false;
-        }
-        if (numberB === '') {
-            return true;
-        }
-
-        const numberCompare = compareNumberText(numberA, numberB);
-        if (numberCompare !== 0) {
-            return numberCompare < 0;
-        }
-    }
-
-    // 7. 剩余完全同级的节点按完整名称兜底排序，保证比较稳定
+    // 6. 同一个旗帜内，按去掉国旗后的完整名称自然排序：文字逐字符比较，数字按数值比较
     const sortResult = compareMixedText(removeLeadingFlagEmoji(remarkA_Full), removeLeadingFlagEmoji(remarkB_Full));
     if (sortResult < 0) {
         return true; // a应该在前面
