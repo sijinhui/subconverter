@@ -17,6 +17,10 @@ DOMAIN,sora.com
 DOMAIN-SUFFIX,sora.com
 
 # OpenAI's documented ChatGPT service dependencies.
+# https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
+DOMAIN,humb.apple.com
+# Apple App Attest endpoint referenced in ChatGPT iOS troubleshooting.
+DOMAIN,register.appattest.apple.com
 DOMAIN,ct.sendgrid.net
 DOMAIN-SUFFIX,ct.sendgrid.net
 DOMAIN,challenges.cloudflare.com
@@ -40,3 +44,45 @@ DOMAIN,js.stripe.com
 DOMAIN,o207216.ingest.sentry.io
 DOMAIN,o33249.ingest.sentry.io
 DOMAIN,rum.browser-intake-datadoghq.com
+
+# Anthropic / Claude: websites, API, and their subdomains.
+DOMAIN,claude.ai
+DOMAIN-SUFFIX,claude.ai
+DOMAIN,claude.com
+DOMAIN-SUFFIX,claude.com
+DOMAIN,anthropic.com
+DOMAIN-SUFFIX,anthropic.com
+
+# Additional domains observed when visiting the Claude website.
+DOMAIN,linkedin.com
+DOMAIN-SUFFIX,linkedin.com
+DOMAIN,hubapi.com
+DOMAIN-SUFFIX,hubapi.com
+DOMAIN-SUFFIX,website-files.com
+# Additional Anthropic domains from the MetaCubeX anthropic ruleset.
+# https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/anthropic.yaml
+DOMAIN,clau.de
+DOMAIN-SUFFIX,clau.de
+DOMAIN,claudeusercontent.com
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN,claudemcpclient.com
+DOMAIN-SUFFIX,claudemcpclient.com
+DOMAIN,claudemcpcontent.com
+DOMAIN-SUFFIX,claudemcpcontent.com
+DOMAIN,servd-anthropic-website.b-cdn.net
+
+# Claude Code error reporting (documented corporate proxy dependency).
+DOMAIN,sentry.io
+DOMAIN-SUFFIX,sentry.io
+
+# Claude Desktop and Artifacts dependencies documented by Anthropic.
+# https://code.claude.com/docs/en/desktop#network-access-requirements
+DOMAIN,claude.app
+DOMAIN-SUFFIX,claude.app
+DOMAIN,fonts.googleapis.com
+DOMAIN,fonts.gstatic.com
+DOMAIN,cdnjs.cloudflare.com
+DOMAIN,cdn.jsdelivr.net
+DOMAIN,cdn.tailwindcss.com
+DOMAIN,code.jquery.com
+DOMAIN,unpkg.com
