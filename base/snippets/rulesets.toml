@@ -58,9 +58,9 @@ ruleset = "rules/ACL4SSR/Clash/ChinaDomain.list"
 group = "🎯 全球直连"
 ruleset = "rules/ACL4SSR/Clash/Ruleset/Sony.list"
 
-[[rulesets]]
-group = "🎯 全球直连"
-ruleset = "rules/ACL4SSR/Clash/Ruleset/Apple.list"
+#[[rulesets]]
+#group = "🎯 全球直连"
+#ruleset = "rules/ACL4SSR/Clash/Ruleset/Apple.list"
 
 [[rulesets]]
 group = "🎯 全球直连"
