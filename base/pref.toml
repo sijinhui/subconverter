@@ -291,6 +291,14 @@ function compare(node_a, node_b) {
         }
     }
 
+    // 2.2 self 开头的自建节点整体排在最前面，否则会被后面的国旗排序拆散到各地区里
+    const aIsSelf = removeLeadingFlagEmoji(remarkA_Full).toLowerCase().startsWith('self');
+    const bIsSelf = removeLeadingFlagEmoji(remarkB_Full).toLowerCase().startsWith('self');
+
+    if (aIsSelf !== bIsSelf) {
+        return aIsSelf ? true : false; // self 节点排前面，其余节点保持原有规则
+    }
+
     // 3. 不带【】前缀的节点排在前面（优先于带【】前缀的）
     const aHasBrackets = hasBrackets(remarkA_Full);
     const bHasBrackets = hasBrackets(remarkB_Full);
