@@ -30,11 +30,14 @@ dns:
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
 proxy-groups: ~
-rules: ~
+# 拦截 UDP/443（常见 QUIC/HTTP/3），避免不支持 UDP 的节点导致直连回退。
+rules:
+  - 'AND,((DST-PORT,443),(NETWORK,udp)),REJECT'
 {% else %}
 Proxy: ~
 Proxy Group: ~
-Rule: ~
+Rule:
+  - 'AND,((DST-PORT,443),(NETWORK,udp)),REJECT'
 {% endif %}
 
 {% endif %}
