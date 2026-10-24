@@ -8,6 +8,9 @@ log-level: {{ default(global.clash.log_level, "info") }}
 
 external-controller: {{ default(global.clash.external_controller, "127.0.0.1:9090") }}
 {% if default(request.clash.dns, "") == "1" %}
+# 内置 GitHub 地址国内常拉不下来，geosite 缺失会导致整份配置加载失败
+geox-url:
+  geosite: https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
 dns:
   enable: true
   prefer-h3: true
@@ -15,6 +18,24 @@ dns:
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
+  # 节点域名必须用国内 DNS 解析，否则连节点前要先经节点查 DNS，死循环
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  # 国内域名走国内 DNS 拿就近 CDN；境外域名经节点查境外 DoH，避免泄露和污染
+  # 境外 DoH 用 IP 形式：prefer-h3 的 UDP 探测会先用 default-nameserver 在本地解析服务器域名
+  nameserver-policy:
+    "geosite:private,cn":
+      - https://doh.pub/dns-query
+      - tls://dot.pub
+      - https://dns.alidns.com/dns-query
+      - tls://dns.alidns.com:853
+    "geosite:geolocation-!cn":
+      - "https://1.1.1.1/dns-query#🔰 节点选择"
+      - "https://1.0.0.1/dns-query#🔰 节点选择"
+      - "https://8.8.8.8/dns-query#🔰 节点选择"
+      - "https://8.8.4.4/dns-query#🔰 节点选择"
+  # 未命中上面的域名仍走国内，保证末尾 GEOIP,CN 判断准确
   nameserver:
     - https://doh.pub/dns-query
     - tls://dot.pub
