@@ -22,7 +22,7 @@ dns:
   proxy-server-nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-  # 国内域名走国内 DNS 拿就近 CDN；境外域名经节点查境外 DoH，避免泄露和污染
+  # 国内域名走国内 DNS 拿就近 CDN；其他域名走默认境外 DoH
   # 境外 DoH 用 IP 形式：prefer-h3 的 UDP 探测会先用 default-nameserver 在本地解析服务器域名
   nameserver-policy:
     "geosite:private,cn":
@@ -30,17 +30,12 @@ dns:
       - tls://dot.pub
       - https://dns.alidns.com/dns-query
       - tls://dns.alidns.com:853
-    "geosite:geolocation-!cn":
-      - "https://1.1.1.1/dns-query#🔰 节点选择"
-      - "https://1.0.0.1/dns-query#🔰 节点选择"
-      - "https://8.8.8.8/dns-query#🔰 节点选择"
-      - "https://8.8.4.4/dns-query#🔰 节点选择"
-  # 未命中上面的域名仍走国内，保证末尾 GEOIP,CN 判断准确
+  # 未分类域名默认经节点查询境外 DoH，避免随机域名落到国内递归 DNS
   nameserver:
-    - https://doh.pub/dns-query
-    - tls://dot.pub
-    - https://dns.alidns.com/dns-query
-    - tls://dns.alidns.com:853
+    - "https://1.1.1.1/dns-query#🔰 节点选择"
+    - "https://1.0.0.1/dns-query#🔰 节点选择"
+    - "https://8.8.8.8/dns-query#🔰 节点选择"
+    - "https://8.8.4.4/dns-query#🔰 节点选择"
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
