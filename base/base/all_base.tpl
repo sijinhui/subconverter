@@ -25,6 +25,10 @@ dns:
   # 国内域名走国内 DNS 拿就近 CDN；其他域名走默认境外 DoH
   # 境外 DoH 用 IP 形式：prefer-h3 的 UDP 探测会先用 default-nameserver 在本地解析服务器域名
   nameserver-policy:
+    # 直连规则集里的域名也走国内 DNS；名字须与外部配置 ruleset 生成的 rule-provider 一致，缺失会导致配置加载失败
+    "rule-set:LocalAreaNetwork (Domain),direct (Domain),ChinaDomain (Domain),Apple (Domain)":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
     "geosite:private,cn":
       - https://doh.pub/dns-query
       - tls://dot.pub
