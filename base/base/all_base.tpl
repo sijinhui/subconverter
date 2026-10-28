@@ -13,7 +13,8 @@ geox-url:
   geosite: https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
 dns:
   enable: true
-  prefer-h3: true
+  # 境外 DoH 经节点时 UDP 多被 TCP 承载，QUIC 无优势，探测赛跑反而频繁产生 context canceled
+  prefer-h3: false
   use-system-hosts: true
   default-nameserver:
     - 119.29.29.29
@@ -23,7 +24,7 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   # 国内域名走国内 DNS 拿就近 CDN；其他域名走默认境外 DoH
-  # 境外 DoH 用 IP 形式：prefer-h3 的 UDP 探测会先用 default-nameserver 在本地解析服务器域名
+  # 境外 DoH 用 IP 形式，免去先解析 DoH 服务器域名
   nameserver-policy:
     "geosite:private,cn":
       - https://doh.pub/dns-query
@@ -31,11 +32,10 @@ dns:
       - https://dns.alidns.com/dns-query
       - tls://dns.alidns.com:853
   # 未分类域名默认经节点查询境外 DoH，避免随机域名落到国内递归 DNS
+  # 上游会并发查询、先到先用，都走同一节点，两家各留一个即可
   nameserver:
     - "https://1.1.1.1/dns-query#🔰 节点选择"
-    - "https://1.0.0.1/dns-query#🔰 节点选择"
     - "https://8.8.8.8/dns-query#🔰 节点选择"
-    - "https://8.8.4.4/dns-query#🔰 节点选择"
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
