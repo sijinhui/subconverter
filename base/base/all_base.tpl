@@ -5,8 +5,10 @@ socks-port: {{ default(global.clash.socks_port, "7891") }}
 allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
-# 本地无 IPv6 出口，拨号 IPv6 地址只会 no route to host，整体关闭
-ipv6: false
+# 保留 IPv6：有 IPv6 出口时可用；没有时 IPv6 拨号立即失败，靠下面的并发拨号由 IPv4 兜底
+ipv6: true
+# 并发拨号解析到的所有 IP，先握手成功的胜出，避免先等 IPv6 失败再回退 IPv4
+tcp-concurrent: true
 
 external-controller: {{ default(global.clash.external_controller, "127.0.0.1:9090") }}
 {% if default(request.clash.dns, "") == "1" %}
@@ -15,8 +17,8 @@ geox-url:
   geosite: https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
 dns:
   enable: true
-  # 不返回 AAAA 记录，避免拿到 IPv6 地址去拨号
-  ipv6: false
+  # 同时返回 A 与 AAAA，配合 tcp-concurrent 自动选择可用的协议栈
+  ipv6: true
   # 境外 DoH 经节点时 UDP 多被 TCP 承载，QUIC 无优势，探测赛跑反而频繁产生 context canceled
   prefer-h3: false
   use-system-hosts: true
