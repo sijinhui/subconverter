@@ -48,6 +48,21 @@ dns:
     - "+.lan"
     - "+.local"
   enhanced-mode: redir-host
+# 系统 DNS 为 IPv6 链路本地地址（如手机热点下发的 fe80::）时，TUN 劫持不到，应用拿到污染 IP 直连 TUN
+# 嗅探 TLS/HTTP/QUIC 还原域名并覆盖目标，按域名匹配规则、交给节点解析
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "+.push.apple.com"
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
