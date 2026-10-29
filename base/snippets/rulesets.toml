@@ -12,6 +12,10 @@ interval = 86400
 group = "🔰 节点选择"
 ruleset = "rules/ProxyCustom.list"
 
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "rules/AppleDirectCustom.list"
+
 #[[rulesets]]
 #group = "🎯 全球直连"
 #ruleset = "rules/DivineEngine/Surge/Ruleset/Unbreak.list"

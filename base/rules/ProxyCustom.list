@@ -2,6 +2,21 @@ DOMAIN-SUFFIX,z.ai
 DOMAIN,z.ai
 DOMAIN-SUFFIX,amazonaws.com
 
+# Google: Loyalsoldier direct.txt carries v2fly's google@cn entries
+# (www.gstatic.com, ssl.gstatic.com, dl.google.com, *.googleapis.com ...).
+# Those hosts no longer have mainland China endpoints and time out on DIRECT,
+# so send the Google service domains through the proxy before direct.txt matches.
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,gvt1.com
+DOMAIN-SUFFIX,gvt2.com
+DOMAIN-SUFFIX,google-analytics.com
+DOMAIN-SUFFIX,googletagmanager.com
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,googlesyndication.com
+DOMAIN-SUFFIX,doubleclick.net
+
 # OpenAI / ChatGPT: root domains are listed explicitly as well as their subdomains.
 DOMAIN,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.com

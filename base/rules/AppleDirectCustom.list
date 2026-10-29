@@ -1,0 +1,35 @@
+# Apple iCloud and system/app update traffic stays DIRECT.
+# Loaded after ProxyCustom.list, so the Apple hosts listed there (ChatGPT
+# dependencies) still go through the proxy.
+
+# iCloud: sync, Photos, Drive, backups, CloudKit.
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud.com.cn
+DOMAIN-SUFFIX,icloud-content.com
+DOMAIN-SUFFIX,icloud-content.com.cn
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple-livephotoskit.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,aaplimg.com
+
+# iOS / iPadOS / macOS software updates and recovery.
+DOMAIN,mesu.apple.com
+DOMAIN,gdmf.apple.com
+DOMAIN,gg.apple.com
+DOMAIN,gs.apple.com
+DOMAIN,ig.apple.com
+DOMAIN,xp.apple.com
+DOMAIN,appldnld.apple.com
+DOMAIN,swscan.apple.com
+DOMAIN,swdist.apple.com
+DOMAIN,swcdn.apple.com
+DOMAIN,swdownload.apple.com
+DOMAIN,updates.apple.com
+DOMAIN,osrecovery.apple.com
+DOMAIN,oscdn.apple.com
+DOMAIN,skl.apple.com
+
+# App Store downloads and updates.
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN,iosapps.itunes.apple.com
+DOMAIN,osxapps.itunes.apple.com

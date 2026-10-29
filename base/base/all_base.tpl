@@ -5,6 +5,10 @@ socks-port: {{ default(global.clash.socks_port, "7891") }}
 allow-lan: {{ default(global.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
+# 保留 IPv6：有 IPv6 出口时可用；没有时 IPv6 拨号立即失败，靠下面的并发拨号由 IPv4 兜底
+ipv6: true
+# 并发拨号解析到的所有 IP，先握手成功的胜出，避免先等 IPv6 失败再回退 IPv4
+tcp-concurrent: true
 
 external-controller: {{ default(global.clash.external_controller, "127.0.0.1:9090") }}
 {% if default(request.clash.dns, "") == "1" %}
@@ -13,7 +17,10 @@ geox-url:
   geosite: https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
 dns:
   enable: true
-  prefer-h3: true
+  # 同时返回 A 与 AAAA，配合 tcp-concurrent 自动选择可用的协议栈
+  ipv6: true
+  # 境外 DoH 经节点时 UDP 多被 TCP 承载，QUIC 无优势，探测赛跑反而频繁产生 context canceled
+  prefer-h3: false
   use-system-hosts: true
   default-nameserver:
     - 119.29.29.29
@@ -23,7 +30,7 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   # 国内域名走国内 DNS 拿就近 CDN；其他域名走默认境外 DoH
-  # 境外 DoH 用 IP 形式：prefer-h3 的 UDP 探测会先用 default-nameserver 在本地解析服务器域名
+  # 境外 DoH 用 IP 形式，免去先解析 DoH 服务器域名
   nameserver-policy:
     # 直连规则集里的域名也走国内 DNS；名字须与外部配置 ruleset 生成的 rule-provider 一致，缺失会导致配置加载失败
     "rule-set:LocalAreaNetwork (Domain),direct (Domain),ChinaDomain (Domain),Apple (Domain)":
@@ -35,23 +42,22 @@ dns:
       - https://dns.alidns.com/dns-query
       - tls://dns.alidns.com:853
   # 未分类域名默认经节点查询境外 DoH，避免随机域名落到国内递归 DNS
+  # 上游会并发查询、先到先用，都走同一节点，两家各留一个即可
   nameserver:
     - "https://1.1.1.1/dns-query#🔰 节点选择"
-    - "https://1.0.0.1/dns-query#🔰 节点选择"
     - "https://8.8.8.8/dns-query#🔰 节点选择"
-    - "https://8.8.4.4/dns-query#🔰 节点选择"
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-  - '*.lan'
-  - '*.local'
-  - '*.arpa'
-  - 'time.*.com'
-  - 'ntp.*.com'
-  - 'time.*.com'
-  - '+.market.xiaomi.com'
-  - localhost.ptlogin2.qq.com
-  - '*.msftncsi.com'
-  - www.msftconnecttest.com
+    - '*.lan'
+    - '*.local'
+    - '*.arpa'
+    - 'time.*.com'
+    - 'ntp.*.com'
+    - 'time.*.com'
+    - '+.market.xiaomi.com'
+    - localhost.ptlogin2.qq.com
+    - '*.msftncsi.com'
+    - www.msftconnecttest.com
   enhanced-mode: fake-ip
   fake-ip-filter-mode: blacklist
   fake-ip-range6: fdfe:dcba:9876::1/64
@@ -67,6 +73,21 @@ dns:
     - 0.0.0.0/32
   listen: :53
   use-hosts: true
+# 系统 DNS 为 IPv6 链路本地地址（如手机热点下发的 fe80::）时，TUN 劫持不到，应用拿到污染 IP 直连 TUN
+# 嗅探 TLS/HTTP/QUIC 还原域名并覆盖目标，按域名匹配规则、交给节点解析
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "+.push.apple.com"
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
