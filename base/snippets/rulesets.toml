@@ -1,3 +1,8 @@
+# tailscaled 默认端口：mihomo 的 UDP 会话按源端口只匹配首包，按目标 IP 分流会把整条会话带去代理
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "[]SRC-PORT,41641"
+
 [[rulesets]]
 group = "🎯 全球直连"
 ruleset = "rules/LocalAreaNetwork.list"
