@@ -42,10 +42,31 @@ dns:
     - "https://8.8.4.4/dns-query#🔰 节点选择"
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "*"
-    - "+.lan"
-    - "+.local"
-  enhanced-mode: redir-host
+  - '*.lan'
+  - '*.local'
+  - '*.arpa'
+  - 'time.*.com'
+  - 'ntp.*.com'
+  - 'time.*.com'
+  - '+.market.xiaomi.com'
+  - localhost.ptlogin2.qq.com
+  - '*.msftncsi.com'
+  - www.msftconnecttest.com
+  enhanced-mode: fake-ip
+  fake-ip-filter-mode: blacklist
+  fake-ip-range6: fdfe:dcba:9876::1/64
+  fallback-filter:
+    domain:
+    - +.google.com
+    - +.facebook.com
+    - +.youtube.com
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+    - 240.0.0.0/4
+    - 0.0.0.0/32
+  listen: :53
+  use-hosts: true
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
