@@ -10,6 +10,13 @@ IP-CIDR6,fe80::/10,no-resolve
 IP-CIDR6,fd00::/8,no-resolve
 # 腾讯系的检测网址
 DOMAIN,otheve.beacon.qq.com
+# > 微信进程直连（macOS / Windows 旧版 / Windows 4.x / 小程序 / Android 包名，iOS 不支持）
+PROCESS-NAME,WeChat
+PROCESS-NAME,WeChat.exe
+PROCESS-NAME,Weixin.exe
+PROCESS-NAME,WeChatAppEx
+PROCESS-NAME,WeChatAppEx.exe
+PROCESS-NAME,com.tencent.mm
 # > ainnovation
 DOMAIN-SUFFIX,ainnovation.com
 DOMAIN-SUFFIX,ainnovation.cn
