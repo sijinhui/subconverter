@@ -30,5 +30,7 @@ DOMAIN,xiaosi.chat
 DOMAIN,mini4k.com
 DOMAIN-SUFFIX,mini4k.com
 DOMAIN-SUFFIX,ntp.org
+# > 自建 DERP（东京 hh-tokyo，TCP/UDP 41611）
+IP-CIDR,167.148.6.187/32,no-resolve
 # 临时 租赁用
 # IP-CIDR,172.44.0.0/16,no-resolve
