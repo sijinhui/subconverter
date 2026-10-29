@@ -17,11 +17,11 @@ DOMAIN-SUFFIX,googleadservices.com
 DOMAIN-SUFFIX,googlesyndication.com
 DOMAIN-SUFFIX,doubleclick.net
 
-# OpenAI / ChatGPT: root domains are listed explicitly as well as their subdomains.
-DOMAIN,chatgpt.com
-DOMAIN-SUFFIX,chatgpt.com
-DOMAIN,openai.com
-DOMAIN-SUFFIX,openai.com
+# OpenAI / ChatGPT: keywords catch any host containing them (openai.com, chatgpt.com,
+# openaiapi-site.azureedge.net, cdn.openaimerge.com, and new ones not listed here).
+# Domains without the keywords are listed explicitly as well as their subdomains.
+DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,chatgpt
 DOMAIN,oaistatic.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN,oaiusercontent.com
@@ -48,8 +48,6 @@ DOMAIN,intercom.io
 DOMAIN-SUFFIX,intercom.io
 DOMAIN,intercomcdn.com
 DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN,openaiapi-site.azureedge.net
-DOMAIN,cdn.openaimerge.com
 DOMAIN,cdn.workos.com
 DOMAIN,forwarder.workos.com
 DOMAIN,images.workoscdn.com
@@ -60,13 +58,11 @@ DOMAIN,o207216.ingest.sentry.io
 DOMAIN,o33249.ingest.sentry.io
 DOMAIN,rum.browser-intake-datadoghq.com
 
-# Anthropic / Claude: websites, API, and their subdomains.
-DOMAIN,claude.ai
-DOMAIN-SUFFIX,claude.ai
-DOMAIN,claude.com
-DOMAIN-SUFFIX,claude.com
-DOMAIN,anthropic.com
-DOMAIN-SUFFIX,anthropic.com
+# Anthropic / Claude: keywords catch any host containing them (claude.ai, claude.com,
+# claude.app, anthropic.com, claudeusercontent.com, claudemcp*.com,
+# servd-anthropic-website.b-cdn.net, and new ones not listed here).
+DOMAIN-KEYWORD,claude
+DOMAIN-KEYWORD,anthropic
 
 # Additional domains observed when visiting the Claude website.
 DOMAIN,linkedin.com
@@ -78,13 +74,6 @@ DOMAIN-SUFFIX,website-files.com
 # https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/anthropic.yaml
 DOMAIN,clau.de
 DOMAIN-SUFFIX,clau.de
-DOMAIN,claudeusercontent.com
-DOMAIN-SUFFIX,claudeusercontent.com
-DOMAIN,claudemcpclient.com
-DOMAIN-SUFFIX,claudemcpclient.com
-DOMAIN,claudemcpcontent.com
-DOMAIN-SUFFIX,claudemcpcontent.com
-DOMAIN,servd-anthropic-website.b-cdn.net
 
 # Claude Code error reporting (documented corporate proxy dependency).
 DOMAIN,sentry.io
@@ -92,8 +81,6 @@ DOMAIN-SUFFIX,sentry.io
 
 # Claude Desktop and Artifacts dependencies documented by Anthropic.
 # https://code.claude.com/docs/en/desktop#network-access-requirements
-DOMAIN,claude.app
-DOMAIN-SUFFIX,claude.app
 DOMAIN,fonts.googleapis.com
 DOMAIN,fonts.gstatic.com
 DOMAIN,cdnjs.cloudflare.com
